@@ -5,10 +5,10 @@ Dev-C++（或者叫做 Dev-Cpp）是 Windows 环境下的一个轻量级 C/C++ �
 
 请下载最新版本：
 
-下载链接1：[从 GitHub 下载 Dev-C++ 5.13 中文版](https://github.com/anbangli/Dev-Cpp-cn/releases/download/v5.13cn/Dev-Cpp-5.13-cn.exe) 
+下载链接1：[从 GitHub 下载 Dev-C++ 5.13 中文版](https://github.com/banzhusoft/devcpp-cn/releases/download/v5.13/Dev-Cpp-5.13-cn.exe) 
 
 
-下载链接2：[从中国电信天翼云盘下载 Dev-C++ 5.13 中文版](https://cloud.189.cn/t/niiIviVNZvIn) （需要注册天翼云盘帐号）
+下载链接2：[从中国电信天翼云盘下载 Dev-C++ 5.13 中文版](https://cloud.189.cn/t/3YvYR3uqERBr) （需要注册天翼云盘帐号并登录）
 
 
-下载链接3：[从百度网盘下载 Dev-C++ 5.13 中文版](https://pan.baidu.com/s/1EdB41MOtCi_3SeUPjRVWcQ) （需要有百度帐号，并输入提取码: vfjt）
+下载链接3：[从百度网盘下载 Dev-C++ 5.13 中文版](链接：https://pan.baidu.com/s/17X61utxZMytdfrR9yoc3Lw) （需要注册百度帐号并登录，提取码: 9o19）
