@@ -12,3 +12,7 @@ Dev-C++（或者叫做 Dev-Cpp）是 Windows 环境下的一个轻量级 C/C++ �
 
 
 下载链接3：[从百度网盘下载 Dev-C++ 5.13 中文版](https://pan.baidu.com/s/1br7Q3Fy3qqnKOnaNl9hFLw ) （需要注册百度帐号并登录，提取码: scnx）
+
+----
+有兴趣的读者可以看看[更新说明](https://github.com/banzhusoft/devcpp-cn/releases/tag/v5.13)
+
