@@ -1,4 +1,4 @@
-Banzhusoft Dev-C++ is distributed under the GNU General Public License. 
+BanzhuSoft Dev-C++ is distributed under the GNU General Public License. 
 Be sure to read it before using Dev-C++.
 
         GNU GENERAL PUBLIC LICENSE
