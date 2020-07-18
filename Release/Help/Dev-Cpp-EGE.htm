@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dev-C++安装&amp;使用教程 </title>
+<style type="text/css">
+<!--
+.STYLE1 {color: #000033}
+.STYLE2 {
+	color: #990000;
+	font-weight: bold;
+}
+.STYLE3 {color: #990000}
+.STYLE4 {font-size: small}
+.STYLE5 {color: #000000; }
+-->
+</style>
+</head>
+
+<body>
+<table width="1100" border="0" align="center">
+  <tr>
+    <td><h1 align="center"><span class="STYLE3"><strong>Dev-C++ 安装&amp;使用教程</strong><strong> </strong></span></h1>
+      <h1 class="STYLE3"><strong>EGE图形函数库简介</strong> </h1>
+      <p>有很多初学者会注意到，在学习 C/C++ 语言的过程中所编写的程序总是单调的黑白文本界面，因此想要编写出图形界面的程序；而在《计算机图形学》课程中，教学重点是绘图算法，也需要良好的绘图编程环境。 </p>
+      <p>在早期由 Borland 公司开发的 Turbo C 或 Borland C 中包含有一个名为“BGI”的图形函数库，可以用于简便地开发图形界面程序。在当代，也有多个图形函数库可供用户在 C/C++ 程序中编写图形界面。 在此我们向读者推荐使用免费开源的<strong>EGE图形函数库</strong>（网站：<a href="https://xege.org/"><u>https://xege.org/</u></a>）。 </p>
+      <p><strong>EGE（Easy Graphics Engine）</strong>，是 Windows 下的简易绘图库，是一个类似 BGI (graphics.h) 的面向 C/C++ 语言新手的图形库，它的目标也是为了替代 Turbo C 的BGI库而存在。它的使用方法与 Turbo C 中的 graphics.h 相当接近，对新手来说，简单，友好，容易上手，而且因为接口意义直观，即使是之前完全没有接触过图形编程的，也能迅速学会基本的绘图。而且该图形库的绘图效率高，灵活性强，功能多。 </p>
+      <p>目前，EGE图形库已经完美支持微软公司 Visual Studio 集成开发环境（包括且不限于以下版本：VC6、VC2008、VC2010）和以使用MinGW 为编译器的集成开发环境（包括且不限于：C-Free、 Dev-C++、Code::Blocks、CodeLite、Eclipse for C/C++）。</p>
+      <p>在<strong>EGE图形函数库</strong>的网站中提供了详细的安装使用说明。</p>
+      <p>Dev C++ 5.13 中文版已经集成了 EGE 图形函数库，用户可以直接在程序中使用EGE图形函数库中的各种函数来实现图形界面。</p>
+      <p>例如，下面是一个画圆的示例程序： </p>
+      <p class="STYLE1">#include &quot;graphics.h&quot; // 需要引用EGE图形库<br />
+        int main() { <br />
+        initgraph(640, 480); // 初始化，显示一个窗口，这里和 TC 略有区别<br />
+        circle(200, 200, 100); // 画圆，圆心(200, 200)，半径 100<br />
+        getch(); // 暂停一下等待用户按键<br />
+        closegraph(); // 关闭图形界面<br />
+        return 0;<br />
+        } </p>
+      <p>需要注意的是，在 Dev-C++ 5.13 中文版中编写使用EGE图形函数库图形界面程序时，需要自行添加编译参数才行。操作如下：点击Dev-C++ 的菜单“工具”中的“编译选项”，在“在连接器命令行中加入以下命令”下方的文本框中，根据编译器的配置而添加如下文字（实际上是要求在连接时把多个函数库包含进来，并指定程序为图形界面）：</p>
+      <p>（A）如果当前使用的编译配置中包含有“64位”，则添加“<u>-lgraphics</u><u>64</u><u> -luuid -lmsimg32 -lgdi32 -limm32 -lole32 -loleaut32</u>” </p>
+      <p>（B）如果当前使用的编译配置中包含有“32位”，则添加“<u>-lgraphics -luuid -lmsimg32 -lgdi32 -limm32 -lole32 -loleaut32</u><u> </u>”；</p>
+      <p>只有这样设置好编译选项，才能正常地编译、连接和运行使用了EGE图形函数库的程序。</p>
+      <p align="center">&nbsp;</p>
+      <p>&nbsp;</p></td>
+  </tr>
+  <tr>
+    <td><div align="center">
+      <hr />
+      <p>文档编写者联系邮箱：anbangli@foxmail.com</p>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;	</p>
+</body>
+</html>

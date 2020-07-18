@@ -1,0 +1,3 @@
+Dev-C++ uses TDM-GCC-64 9.2.0 as compiler.
+
+If you want to make a release file of Dev-C++, you should create a folder named "TDM-GCC-64", and put all files of TDM-GCC-64 9.2.0 (You'd better copy the folder from Dev-C++'s installation) into the folder.

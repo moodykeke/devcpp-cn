@@ -1,0 +1,510 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>C/C++常用函数</title>
+<style type="text/css">
+<!--
+p.MsoNormal {mso-style-name:正文;
+mso-style-parent:"";
+margin:0pt;
+margin-bottom:.0001pt;
+mso-pagination:none;
+text-align:justify;
+text-justify:inter-ideograph;
+font-family:'Times New Roman';
+font-size:10.5000pt;
+mso-font-kerning:1.0000pt;
+}
+p.MsoNormal1 {mso-style-name:正文;
+mso-style-parent:"";
+margin:0pt;
+margin-bottom:.0001pt;
+mso-pagination:none;
+text-align:justify;
+text-justify:inter-ideograph;
+font-family:'Times New Roman';
+font-size:10.5000pt;
+mso-font-kerning:1.0000pt;
+}
+body,td,th {
+	font-family: Arial, Helvetica, sans-serif;
+}
+.STYLE2 {
+	color: #000066;
+	font-weight: bold;
+}
+body {
+	margin-left: 0px;
+}
+.STYLE4 {color: #990000; font-weight: bold; }
+-->
+</style>
+</head>
+
+<body>
+<table width="1000" border="0" align="center">
+  <tr>
+    <td><h1 align="center"><b><span style="mso-spacerun:'yes';color:rgb(128,0,0); font-weight:bold;mso-font-kerning:18.0000pt;">C/C++语言常用标准库函数</span></b>
+    </h1>
+      <h2><b><span style="mso-spacerun:'yes';font-family:黑体;mso-ascii-font-family:Arial;
+mso-hansi-font-family:Arial;font-weight:bold;font-size:16.0000pt;
+mso-font-kerning:0.0000pt;" ><font face="黑体" >一、数学函数</font></span></b><b><span style="mso-spacerun:'yes';font-family:黑体;mso-ascii-font-family:Arial;
+mso-hansi-font-family:Arial;font-weight:bold;font-size:16.0000pt;
+mso-font-kerning:0.0000pt;" >
+        <o:p></o:p>
+        </span></b></h2>
+        <p >调用数学函数时，按照 C 语言的要求，需在源文件中包含以下代码行：<span class="STYLE2">#include &lt;math.h&gt;</span></p>
+        <p >按照 C++ 语言的要求，需在源文件中包含如下代码行：<span class="STYLE2">#include &lt;cmath&gt;</span></p>
+        <table border="1" cellspacing="0">
+          <tbody>
+            <tr>
+              <td width="279" ><p align="left"><strong>函数原型说明</strong> </p></td>
+              <td width="338" ><p align="left"><strong>功能</strong> </p></td>
+              <td width="114" ><p align="left"><strong>返回值</strong> </p></td>
+              <td width="155" ><p align="left"><strong>说明</strong> </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>acos</strong>(double x) </p></td>
+              <td width="338" ><p>计算 arccos(x) 的值 </p></td>
+              <td width="114" ><p>计算结果 </p></td>
+              <td width="155" ><p>x 在 -1～1 范围内 </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>asin</strong>(double x) </p></td>
+              <td width="338" ><p>计算 arcsin(x) 的值 </p></td>
+              <td width="114" ><p>计算结果 </p></td>
+              <td width="155" ><p>x 在 -1～1 范围内 </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>atan</strong>(double x) </p></td>
+              <td width="338" ><p>计算 arctan(x) 的值 </p></td>
+              <td width="114" ><p>计算结果 </p></td>
+              <td width="155" ><p>  </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>atan2</strong>(double y, double x) </p></td>
+              <td width="338" ><p>计算 arctan(x/y) 的值 </p></td>
+              <td width="114" ><p>计算结果 </p></td>
+              <td width="155" ><p>  </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>cos</strong>(double x) </p></td>
+              <td width="338" ><p>计算 cos(x) 的值 </p></td>
+              <td width="114" ><p>计算结果 </p></td>
+              <td width="155" ><p>x 的单位为弧度 </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>cosh</strong>(double x) </p></td>
+              <td width="338" ><p>计算双曲余弦 cosh(x) 的值 </p></td>
+              <td width="114" ><p>计算结果 </p></td>
+              <td width="155" ><p>  </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>exp</strong>(double x) </p></td>
+              <td width="338" ><p>求 e^x 的值 </p></td>
+              <td width="114" ><p>计算结果 </p></td>
+              <td width="155" ><p>  </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>fabs</strong>(double x) </p></td>
+              <td ><p>求双精度实数 x 的绝对值 </p></td>
+              <td ><p>计算结果 </p></td>
+              <td ><p>  </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>floor</strong>(double x) </p></td>
+              <td width="338" ><p>求不大于双精度实数 x 的最大整数 </p></td>
+              <td width="114" ><p>  </p></td>
+              <td width="155" ><p>  </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>fmod</strong>(double x,double y) </p></td>
+              <td width="338" ><p>求 x/y 整除后的双精度余数 </p></td>
+              <td width="114" ><p>  </p></td>
+              <td width="155" ><p>  </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>frexp</strong>(double val,int *exp) </p></td>
+              <td width="338" ><p>把双精度 val 分解尾数和以 2 为底的指数 n，即 val = x*2n，n 存放在 exp 所指的变量中 </p></td>
+              <td width="114" ><p>返回位数x，0.5&lt;= x &lt; 1 </p>              </td>
+              <td width="155" ><p>  </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>log</strong>(double x) </p></td>
+              <td width="338" ><p>求 ln(x) </p></td>
+              <td width="114" ><p>计算结果 </p></td>
+              <td width="155" ><p>x&gt;0 </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>log10</strong>(double x) </p></td>
+              <td width="338" ><p>求 log10(x) </p></td>
+              <td width="114" ><p>计算结果 </p></td>
+              <td width="155" ><p>x&gt;0 </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>modf</strong>(double val,double *ip) </p></td>
+              <td width="338" ><p>把双精度 val 分解成整数部分和小数部分，整数部分存放在 ip 所指的变量中 </p></td>
+              <td width="114" ><p>返回小数部分 </p></td>
+              <td width="155" ><p>  </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>pow</strong>(double x,double y) </p></td>
+              <td width="338" ><p>计算 x^y 的值 </p></td>
+              <td width="114" ><p>计算结果 </p></td>
+              <td width="155" ><p>  </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>sin</strong>(double x) </p></td>
+              <td width="338" ><p>计算 sin(x) 的值 </p></td>
+              <td width="114" ><p>计算结果 </p></td>
+              <td width="155" ><p>x的单位为弧度 </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>sinh</strong>(double x) </p></td>
+              <td width="338" ><p>计算 x 的双曲正弦函数 sinh(x)的值 </p></td>
+              <td width="114" ><p>计算结果 </p></td>
+              <td width="155" ><p>  </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>sqrt</strong>(double x) </p></td>
+              <td width="338" ><p>计算 x 的开方 </p></td>
+              <td width="114" ><p>计算结果 </p></td>
+              <td width="155" ><p>x≥0 </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>tan</strong>(double x) </p></td>
+              <td width="338" ><p>计算 tan(x) </p></td>
+              <td width="114" ><p>计算结果 </p></td>
+              <td width="155" ><p>  </p></td>
+            </tr>
+            <tr>
+              <td ><p>double <strong>tanh</strong>(double x) </p></td>
+              <td width="338" ><p>计算 x 的双曲正切函数 tanh(x) 的值 </p></td>
+              <td width="114" ><p>计算结果 </p></td>
+              <td width="155" ><p>  </p></td>
+            </tr>
+          </tbody>
+      </table>
+        <p> </p>
+        <h2><strong>二、字符函数</strong><strong> </strong></h2>
+        <p>调用字符函数时，按照 C 语言的要求，需在源文件中包含以下代码行：<span class="STYLE2">#include &lt;ctype.h&gt;</span></p>
+        <p >按照 C++ 语言的要求，需在源文件中包含如下代码行：<span class="STYLE2">#include &lt;iostream&gt;</span></p>
+        <table border="1" cellspacing="0">
+          <tbody>
+            <tr>
+              <td width="234" ><p align="center"><strong>函数原型说明</strong> </p></td>
+              <td width="330" ><p align="center"><strong>功能</strong> </p></td>
+              <td width="169" ><p align="center"><strong>返回值</strong> </p></td>
+            </tr>
+            <tr>
+              <td width="234" ><p>int <strong>isalnum</strong>(int ch) </p></td>
+              <td width="330" ><p>检查 ch 是否为字母或数字 </p></td>
+              <td width="169" ><p>是，返回1；否则返回0 </p></td>
+            </tr>
+            <tr>
+              <td width="234" ><p>int <strong>isalpha</strong>(int ch) </p></td>
+              <td width="330" ><p>检查 ch 是否为字母 </p></td>
+              <td width="169" ><p>是，返回1；否则返回0 </p></td>
+            </tr>
+            <tr>
+              <td width="234" ><p>int <strong>iscntrl</strong>(int ch) </p></td>
+              <td width="330" ><p>检查 ch 是否为控制字符 </p></td>
+              <td width="169" ><p>是，返回1；否则返回0 </p></td>
+            </tr>
+            <tr>
+              <td width="234" ><p>int <strong>isdigit</strong>(int ch) </p></td>
+              <td width="330" ><p>检查 ch 是否为数字 </p></td>
+              <td width="169" ><p>是，返回1；否则返回0 </p></td>
+            </tr>
+            <tr>
+              <td width="234" ><p>int <strong>isgraph</strong>(int ch) </p></td>
+              <td width="330" ><p>检查 ch 是否为 ASCII 码值在 ox21 到 ox7e 的可打印字符（即不包含空格字符） </p></td>
+              <td width="169" ><p>是，返回1；否则返回0 </p></td>
+            </tr>
+            <tr>
+              <td width="234" ><p>int <strong>islower</strong>(int ch) </p></td>
+              <td width="330" ><p>检查 ch 是否为小写字母 </p></td>
+              <td width="169" ><p>是，返回1；否则返回0 </p></td>
+            </tr>
+            <tr>
+              <td width="234" ><p>int <strong>isprint</strong>(int ch) </p></td>
+              <td width="330" ><p>检查 ch 是否为包含空格符在内的可打印字符 </p></td>
+              <td width="169" ><p>是，返回1；否则返回0 </p></td>
+            </tr>
+            <tr>
+              <td width="234" ><p>int <strong>ispunct</strong>(int ch) </p></td>
+              <td width="330" ><p>检查 ch 是否为除了空格、字母、数字之外的可打印字符 </p></td>
+              <td width="169" ><p>是，返回1；否则返回0 </p></td>
+            </tr>
+            <tr>
+              <td width="234" ><p>int <strong>isspace</strong>(int ch) </p></td>
+              <td width="330" ><p>检查 ch 是否为空格、制表或换行符 </p></td>
+              <td width="169" ><p>是，返回1；否则返回0 </p></td>
+            </tr>
+            <tr>
+              <td width="234" ><p>int <strong>isupper</strong>(int ch) </p></td>
+              <td width="330" ><p>检查 ch 是否为大写字母 </p></td>
+              <td width="169" ><p>是，返回1；否则返回0 </p></td>
+            </tr>
+            <tr>
+              <td width="234" ><p>int <strong>isxdigit</strong>(int ch) </p></td>
+              <td width="330" ><p>检查 ch 是否为16进制数 </p></td>
+              <td width="169" ><p>是，返回1；否则返回0 </p></td>
+            </tr>
+            <tr>
+              <td width="234" ><p>int <strong>tolower</strong>(int ch) </p></td>
+              <td width="330" ><p>把 ch 中的字母转换成小写字母 </p></td>
+              <td width="169" ><p>返回对应的小写字母 </p></td>
+            </tr>
+            <tr>
+              <td width="234" ><p>int <strong>toupper</strong>(int ch) </p></td>
+              <td width="330" ><p>把 ch 中的字母转换成大写字母 </p></td>
+              <td width="169" ><p>返回对应的大写字母 </p></td>
+            </tr>
+          </tbody>
+      </table>
+        <h2><strong>三、字符串函数</strong><strong> </strong></h2>
+        <p>调用字符串函数时，按照 C 语言的要求，需在源文件中包含以下代码行：<span class="STYLE2">#include &lt;string.h&gt;</span></p>
+        <p >按照 C++ 语言的要求，需在源文件中包含如下代码行：<span class="STYLE2">#include &lt;cstring&gt;</span></p>
+        <table width="1073" border="1" cellspacing="0">
+          <tbody>
+            <tr>
+              <td width="288" ><p align="center"><strong>函数原型说明</strong> </p></td>
+              <td width="399" ><p align="center"><strong>功能</strong> </p></td>
+              <td width="385" ><p align="center"><strong>返回值</strong> </p></td>
+            </tr>
+            <tr>
+              <td ><p>char *<strong>strcat</strong>(char *s1,char *s2) </p></td>
+              <td ><p>把字符串 s2 接到 s1 后面 </p></td>
+              <td ><p>s1 所指地址 </p></td>
+            </tr>
+            <tr>
+              <td ><p>char *<strong>strchr</strong>(char *s,int ch) </p></td>
+              <td ><p>在 s 所指字符串中，找出第一次出现字符 ch 的位置 </p></td>
+              <td ><p>返回找到的字符的地址，找不到返回 NULL </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>strcmp</strong>(char *s1,char *s2) </p></td>
+              <td ><p>对 s1 和 s2 所指字符串进行比较 </p></td>
+              <td ><p>s1&lt;s2, 返回负数；s1==s2, 返回0；s1&gt;s2, 返回正数 </p></td>
+            </tr>
+            <tr>
+              <td ><p>char *<strong>strcpy</strong>(char *s1,char *s2) </p></td>
+              <td ><p>把 s2 指向的串复制到 s1 指向的空间 </p></td>
+              <td ><p>s1 所指地址 </p></td>
+            </tr>
+            <tr>
+              <td ><p>unsigned <strong>strlen</strong>(char *s) </p></td>
+              <td ><p>求字符串 s 的长度 </p></td>
+              <td ><p>返回串中字符（不计最后的 '\0' ）个数 </p></td>
+            </tr>
+            <tr>
+              <td ><p>char *<strong>strstr</strong>(char *s1,char *s2) </p></td>
+              <td ><p>在 s1 所指字符串中，找出字符串 s2 第一次出现的位置 </p></td>
+              <td ><p>返回找到的字符串的地址，找不到返回 NULL </p></td>
+            </tr>
+          </tbody>
+      </table>
+        <h2><strong>四、输入输出函数</strong><strong> </strong></h2>
+        <p>调用输入输出函数时，按照 C 语言的要求，需在源文件中包含以下代码行：<span class="STYLE4">#include &lt;stdio.h&gt;</span></p>
+        <p >按照 C++ 语言的要求，需在源文件中包含如下代码行：<span class="STYLE4">#include &lt;iostream&gt;</span> </p>
+        
+        <table width="1069" border="1" cellspacing="0">
+          <tbody>
+            <tr>
+              <td width="302" ><p><strong>函数原型说明</strong> </p></td>
+              <td width="430" ><p><strong>功能</strong> </p></td>
+              <td width="323" ><p><strong>返回值</strong> </p></td>
+            </tr>
+            <tr>
+              <td ><p>void <strong>clear</strong>(FILE *fp) </p></td>
+                <td ><p>清除与文件指针 fp 有关的所有出错信息 </p></td>
+                <td ><p>无 </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>fclose</strong>(FILE *fp) </p></td>
+                <td ><p>关闭 fp 所指的文件，释放文件缓冲区 </p></td>
+                <td ><p>出错返回非 0，否则返回 0 </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>feof</strong> (FILE *fp) </p></td>
+                <td ><p>检查文件是否结束 </p></td>
+                <td ><p>遇文件结束返回非 0，否则返回 0 </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>fgetc</strong> (FILE *fp) </p></td>
+                <td ><p>从 fp 所指的文件中取得下一个字符 </p></td>
+                <td ><p>出错返回 EOF，否则返回所读字符 </p></td>
+            </tr>
+            <tr>
+              <td ><p>char *<strong>fgets</strong>(char *buf,int n, FILE *fp) </p></td>
+                <td ><p>从 fp 所指的文件中读取一个长度为 n-1 的字符串，将其存入buf 所指存储区 </p></td>
+                <td ><p>返回 buf 所指地址，若遇文件结束或出错返回 NULL </p></td>
+            </tr>
+            <tr>
+              <td ><p>FILE *<strong>fopen</strong>(char *filename,char *mode) </p></td>
+                <td ><p>以 mode 指定的方式打开名为 filename 的文件 </p></td>
+                <td ><p>成功，返回文件指针（文件信息区的起始地址），否则返回 NULL </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>fprintf</strong>(FILE *fp, char *format, args,…) </p></td>
+                <td ><p>把 args,…的值以 format 指定的格式输出到fp指定的文件中 </p></td>
+                <td ><p>实际输出的字符数 </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>fputc</strong>(char ch, FILE *fp) </p></td>
+                <td ><p>把 ch 中字符输出到 fp 指定的文件中 </p></td>
+                <td ><p>成功返回该字符，否则返回 EOF </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>fputs</strong>(char *str, FILE *fp) </p></td>
+                <td ><p>把 str 所指字符串输出到 fp 所指文件 </p></td>
+                <td ><p>成功返回非负整数，否则返回-1（EOF） </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>fread</strong>(char *pt, unsigned size, unsigned n, FILE *fp) </p></td>
+                <td ><p>从 fp 所指文件中读取长度 size 为 n 个数据项存到 pt 所指文件 </p></td>
+                <td ><p>读取的数据项个数 </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>fscanf</strong> (FILE *fp, char *format, args,…) </p></td>
+                <td ><p>从 fp 所指的文件中按 format 指定的格式把输入数据存入到args, …所指的内存中 </p></td>
+                <td ><p>已输入的数据个数，遇文件结束或出错返回 0 </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>fseek</strong> (FILE *fp,long offer,int base) </p></td>
+                <td ><p>移动 fp 所指文件的位置指针 </p></td>
+                <td ><p>成功返回当前位置，否则返回非 0 </p></td>
+            </tr>
+            <tr>
+              <td ><p>long <strong>ftell</strong> (FILE *fp) </p></td>
+                <td ><p>求出 fp 所指文件当前的读写位置 </p></td>
+                <td ><p>读写位置，出错返回 -1L </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>fwrite</strong>(char *pt,unsigned size, unsigned n, FILE *fp) </p></td>
+                <td ><p>把 pt 所指向的 n*size 个字节输入到 fp 所指文件 </p></td>
+                <td ><p>输出的数据项个数 </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>getc</strong> (FILE *fp) </p></td>
+                <td ><p>从 fp 所指文件中读取一个字符 </p></td>
+                <td ><p>返回所读字符，若出错或文件结束返回EOF </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>getchar</strong>(void) </p></td>
+                <td ><p>从标准输入设备读取下一个字符 </p></td>
+                <td ><p>返回所读字符，若出错或文件结束返回-1 </p></td>
+            </tr>
+            <tr>
+              <td ><p>char *<strong>gets</strong>(char *s) </p></td>
+                <td ><p>从标准设备读取一行字符串放入 s 所指存储区，用 ’\0’ 替换读入的换行符 </p></td>
+                <td ><p>返回s,出错返回NULL </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>printf</strong>(char *format,args,…) </p></td>
+                <td ><p>把 args, … 的值以 format 指定的格式输出到标准输出设备 </p></td>
+                <td ><p>输出字符的个数 </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>putc</strong> (int ch, FILE *fp) </p></td>
+                <td ><p>同 fputc </p></td>
+                <td ><p>同fputc </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>putchar</strong>(char ch) </p></td>
+                <td ><p>把 ch 输出到标准输出设备 </p></td>
+                <td ><p>返回输出的字符，若出错则返回EOF </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>puts</strong>(char *str) </p></td>
+                <td ><p>把 str 所指字符串输出到标准设备，将 ’\0’ 转成回车换行符 </p></td>
+                <td ><p>返回换行符，若出错，返回EOF </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>rename</strong>(char *oldname,char *newname) </p></td>
+                <td ><p>把 oldname 所指文件名改为 newname 所指文件名 </p></td>
+                <td ><p>成功返回0，出错返回-1 </p></td>
+            </tr>
+            <tr>
+              <td ><p>void <strong>rewind</strong>(FILE *fp) </p></td>
+                <td ><p>将文件位置指针置于文件开头 </p></td>
+                <td ><p>无 </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>scanf</strong>(char *format,args,…) </p></td>
+                <td ><p>从标准输入设备按 format 指定的格式把输入数据存入到 args, … 所指的内存中 </p></td>
+                <td ><p>已输入的数据的个数 </p></td>
+            </tr>
+          </tbody>
+      </table>
+        
+      <h2><strong>五、内存动态分配函数和随机函数</strong><strong> </strong></h2>
+        <p> 调用内存动态分配函数和随机函数函数时，按照 C 语言的要求，需在源文件中包含以下代码行：<span class="STYLE4">#include &lt;stdlib.h&gt;</span></p>
+        <p >按照 C++ 语言的要求，需在源文件中包含如下代码行：<span class="STYLE4">#include &lt;cstdlib&gt;</span></p>
+        <table width="1056" border="1" cellspacing="0">
+          <tbody>
+            <tr>
+              <td width="275" ><p align="center"><strong>函数原型说明</strong> </p></td>
+              <td width="445" ><p align="center"><strong>功能</strong> </p></td>
+              <td width="322" ><p align="center"><strong>返回值</strong> </p></td>
+            </tr>
+            <tr>
+              <td ><p>void <strong>srand</strong>(unsigned int seed); </p></td>
+              <td ><p>设置随机数种子。 常见用法：<strong>srand</strong>(<strong>time</strong>(NULL)) </p></td>
+              <td ><p> </p></td>
+            </tr>
+            <tr>
+              <td ><p>int <strong>rand</strong>(void) </p></td>
+              <td ><p>产生 0～RAND_MAX 的随机整数 </p></td>
+              <td ><p>返回一个随机整数 </p></td>
+            </tr>
+            <tr>
+              <td ><p>void *<strong>calloc</strong>(unsigned n, unsigned size) </p></td>
+              <td ><p>分配 n 个数据项的内存空间，每个数据项的大小为 size 个字节 </p></td>
+              <td ><p>分配内存单元的起始地址；如不成功，返回0 </p></td>
+            </tr>
+            <tr>
+              <td ><p>void *<strong>free</strong>(void *p) </p></td>
+              <td ><p>释放 p 所指的内存区 </p></td>
+              <td ><p>无 </p></td>
+            </tr>
+            <tr>
+              <td ><p>void *<strong>malloc</strong>(unsigned size) </p></td>
+              <td ><p>分配 size 个字节的存储空间 </p></td>
+              <td ><p>分配内存空间的地址；如不成功，返回0 </p></td>
+            </tr>
+            <tr>
+              <td ><p>void *<strong>realloc</strong>(void *p,unsigned size) </p></td>
+              <td ><p>把 p 所指内存区的大小改为 size 个字节 </p></td>
+              <td ><p>新分配内存空间的地址；如不成功，返回0 </p></td>
+            </tr>
+            <tr>
+              <td ><p>void <strong>exit</strong>(int state) </p></td>
+              <td ><p>程序终止执行，返回调用过程，state 为 0 正常终止，非 0 非正常终止 </p></td>
+              <td ><p>无 </p></td>
+            </tr>
+          </tbody>
+      </table>
+        <p>C++ 语言中通常用 <strong>new</strong> 命令申请分配动态存储空间，用 <strong>delete</strong> 命令释放所申请的存储空间。</p>
+        <p>&nbsp;</p>
+        <p>关于标准库函数的更多说明，详见 <a href="http://www.gnu.org/gnu/gnu.html">GNU 官网</a>中的文档：<a href="http://www.gnu.org/software/libc/manual/html_node/index.html">http://www.gnu.org/software/libc/manual/html_node/index.html</a> </p>
+    <p >&nbsp;</p></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <blockquote>
+        <p align="left">&nbsp;</p>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+</blockquote>
+</body>
+</html>

@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dev-C++安装&amp;使用教程 </title>
+<style type="text/css">
+<!--
+.STYLE2 {
+	color: #990000;
+	font-weight: bold;
+}
+.STYLE3 {color: #990000}
+.STYLE4 {font-size: small}
+.STYLE5 {color: #000000; }
+-->
+</style>
+</head>
+
+<body>
+<table width="1000" border="0" align="center">
+  <tr>
+    <td><h1 align="center"><span class="STYLE3"><strong>Dev-C++ 安装&amp;使用教程</strong><strong> </strong></span></h1>
+      <p align="left">使用高级语言编程时，我们通常使用一个集成开发环境（Integrated Developing Enviroment，简称IDE）来进行编辑、编译、运行和调试工作。对于 C 和 C++ 语言，常用的集成开发环境有：很早的 Turbo C 和 Turbo C++（这两个太旧了，不推荐使用）、复杂而庞大的Microsoft Visual Studio（有6.0，7.1，2003，2005，2008，2013，2015等多个版本），免费而简洁的 Dev-C++ 和 Code::Block 等等。在此简要介绍 Dev-C++ 的安装和使用方法。 </p>
+      <h2><span class="STYLE2">1、安装与启动</span> </h2>
+      <p>Dev-C++ （有时候也称为 Dev-Cpp）是一个免费软件，最早是由 BloodShed 公司开发的，在版本 4.9.2 之后该公司停止开发并开放源代码。然后由 Orwell 接手进行维护，陆续开发了几个版本，后来也有其他开发人员陆续参与开发维护并发布了一些分支版本。</p>
+      <p>建议读者从 Dev-C++ 中文版网站（<a href="https://banzhusoft.github.io/devcpp-cn/">https://banzhusoft.github.io/devcpp-cn/</a>）下载最新版本（2020年7月）：<strong>Dev-C++ 5.14中文版</strong>。</p>
+      <p>下载之后开始<strong>安装</strong>。安装过程很简单，按照对话框的操作提示执行即可，在此略过不叙。 </p>
+      <p>安装完毕之后，双击 Windows 桌面上的 Dev-C++ 图标，以启动Dev-C++。工作界面如下图所示。</p>
+      <p><img src="images-cn/dev-start.png" alt="devcpp" width="903" height="541" /></p>
+      <p>界面上依次显示有菜单栏和两行工具栏。其中第一行工具栏是平时使用最多的，其各个按钮的功能如下图所示：</p>
+      <p><img src="images-cn/dev-toolbar1.png" alt="toolbar1" width="954" height="114" /></p>
+      <h2><span class="STYLE2">2、编辑功能</span> </h2>
+      <p>点击工具栏上的“<strong>新建源代码</strong>”按钮（或者按快捷键 Ctrl+N），就可以新建一个空白的源代码文件，并开始编写程序了。</p>
+      <p>点击工具栏上的“<strong>打开</strong>”按钮（或按快捷键 Ctrl+O），就可以打开一个原有的源代码文件或工程文件，进行编辑。</p>
+      <p>点击工具栏上的“<strong>保存</strong>”按钮（快捷键 Ctrl+S），即可保存当前编辑的文件，默认文件扩展名为“.cpp”。</p>
+      <p>点击工具栏上的“<strong>关闭</strong>”或“<strong>关闭全部</strong>”按钮，即可关闭当前编辑的文件或当前已打开的所有文件。</p>
+      <p>在 Dev-C++ 中编辑文件时，基本操作与其它文本编辑器是完全相同的。不过，除了基本的文本编辑功能之外，Dev-C++还提供了以下一些用于程序编辑的方便功能： </p>
+      <p>（1）点击“<strong>插入片段</strong>”按钮，可以插入一些常用的代码片段。建议用户在编辑每个源文件时，可以插入“文件头注释块”和“C++ main”，以快速开始编辑工作。</p>
+      <p>（2）Dev-C++ 包含有代码格式化工具“Astyle”，可以帮助用户快速地调整源代码的缩进格式。只要点击菜单 “AStyle” 下的 “<strong>格式化当前文件</strong>”（快捷键 Ctrl+Shift+A），就可以按照选定的格式对当前文件进行格式化（自动整理括号和缩进）。（这一操作非常简单，但是能给用户带来很多方便。）</p>
+      <p>（3）编辑窗口左边的“符号和类”窗格中显示了当前程序中定义的函数、全局变量、结构体和类等信息，方便用户掌握整个程序的结构。</p>
+      <p>例如，某个编辑状态如下：</p>
+      <p align="center"><img src="images-cn/dev-edit.png" alt="edit" width="903" height="619" /></p>
+      <h2><span class="STYLE3"><strong>3、编译与运行</strong><strong> </strong></span></h2>
+      <p>程序编写完毕，就可以进行编译了。 </p>
+      <p>首先要设置编译器。 点击Dev-C++工具栏上的“编译器配置”下拉框，就可以看到多种编译器的配置方案并从中选择（见下图）。 </p>
+      <p align="center"><img src="images-cn/dev-compiler.png" alt="compiler" width="967" height="212" /></p>
+      <p>上图中显示，所安装的编译器是 TDM-GCC 9.2.0（这是一个免费开源的C/C++编译器）。选择时主要是考虑两个因素：1、根据自己所安装的Windows系统是 64 位还是 32 位而选择含有“64位”或“32位”的配置方案；2、在准备进行调试时只能选择含有“调试”的方案，只有对于大型程序才需要改用含有“性能分析”和“发行”的方案。 </p>
+      <p>对于大部分用户来说，使用默认的“<strong>TDM-GCC 9.2.0 32位 调试</strong>”方案即可。</p>
+      <p>程序编写完成之后，点击工具栏上的“<strong>编译</strong>”按钮，就可以开始编译，稍等片刻就会完成编译。如果编译出错，则在编辑器下方显示出编译信息面板，其中列出了编辑过程中的出错信息（Dev-C++ 自动地把出错信息翻译成了中文！）。用户需要根据出错信息对程序进行修改。（<a href="FreqCompileQues.htm">常见编译错误解析</a>） </p>
+      <p><img src="images-cn/dev-compiling.png" alt="compiling" width="903" height="654" /></p>
+      <p>编译成功之后可以点击工具栏上的“<strong>运行</strong>”按钮，就可以运行程序。 </p>
+      <p>有时为了省事，可以直接点击工具栏上的“<strong>编译运行</strong>”按钮。</p>
+      <h2><span class="STYLE2">4、Dev-C++ 中的程序调试方法</span></h2>
+      <p>编译时可以检查出源代码中的<strong>语法</strong>错误，但是检查不出源代码中的<strong>逻辑</strong>错误。有时候程序虽然能够编译并运行，但是运行结果却不是预想的结果，那就是因为源代码中存在有逻辑错误。 </p>
+      <p>要想清除程序中的逻辑错误，就必须学会使用开发环境中的调试工具，并观察变量的数值变化，加上自己的逻辑思考，才能找出程序中的错误所在并修改清除之。 </p>
+      <p>Dev-C++提供了强大的排错与调试工具，下面简要介绍具体使用方法。 </p>
+      <p>在使用调试功能之前，请注意应该选择含用“调试”的编译器配置方案（见上一节的说明）。</p>
+      <p>Dev-C++ 没有单独的“调试”菜单，只是在“运行[R]”菜单下面有几个菜单项与调试有关：“切换断点 F4”、“调试 F5”、“停止运行 F6”。同时在工具栏上有 “调试 F5”、“停止运行 F6”按钮。读者需要了解这几个菜单和按钮，然后按下述步骤进行操作。</p>
+      <p><strong>1.开始调试（Debug）</strong> </p>
+      <p>点击工具栏上的“调试”按钮（快捷键 <strong>F5</strong>），或点击菜单“<strong>运行</strong> –&gt; <strong>调试 F5</strong>”即可开始调试。 </p>
+      <p><strong>如果</strong>当前选定的编译器配置方案中不含有调试信息，Dev-C++ 会弹出对话框提示说没有调试信息，不能启动调试。请点击“确定”按钮，然后重新选择带有“调试”的编译器配置方案，再重新进行编译和调试。 </p>
+      <p>程序调试时，就开始运行（通常会弹出一个终端窗口）。运行到到程序中的第一条可执行语句就暂停。这时候最好是手工调整一下 Dev-C++ 窗口的大小和位置，以便能够同时看到 Dev-C++ 窗口和终端窗口（以方便后续操作）。 </p>
+      <p><strong>2. 调试过程中的操作</strong><strong> </strong></p>
+      <p>启动调试之后， Dev-C++ 窗口下半部分时会自动显示调试面板（下图），可以用鼠标点击按钮或按快捷键执行调试操作。</p>
+      <p align="center"><img src="images-cn/dev-debug.png" alt="debug" width="903" height="713" /></p>
+      <p>其中重要的是<strong><u>“下一步”按钮（F7）</u></strong>和<strong><u>“单步进入”按钮（F8）</u></strong>。在简单的只含有一个 main 函数的程序中，这两个按钮的功能是相同的，没有区别。而在含有多个自定义函数的程序中，这两个功能有较大的区别：“<strong>下一步</strong>(F7)”是指把当前语句作为一步执行完毕，而“<strong>单步进入</strong>(F8)”是指如果当前语句中含有函数调用则追踪进入到函数中去执行。</p>
+      <p>如果调用函数是标准函数或你认为无误的函数，就用“下一步”执行（以免追踪进入），对于怀疑有问题的函数才用“单步进入”去追踪。如果一不小心进入了标准函数（例如 printf 函数或“cout &lt;&lt; endl;”输出），则点击“<strong>跳过函数</strong>”以返回。</p>
+      <p><span class="STYLE4">（一个常见问题：有时候在 Dev-C++ 中调试 C++ 程序时，遇到形如“cout &lt;&lt; endl;”这样的语句就会卡住无法继续。这时请停止调试，然后点击菜单“工具”下的“编译选项”，在当前选定的编译器配置方案下，在“代码生成/优化”下的“代码优化”标签页中，为“优化级别(-O)”选择一个合理的值，例如“Debug(g)”或“Med”都可以。确定。然后再重新编译和调试。） </span></p>
+      <p><strong>3. 查看变量的值</strong> </p>
+      <p>开始调试后，常常有必要查看变量的变化情况，因此需要查看变量的值。在默认情况下，如果用鼠标悬浮在当前运行的代码中的变量上方，则会自动出现一个小悬浮窗口，显示出该变量当前的值。</p>
+      <p>如果想更快速地看到变量的值，可以在编辑器中选中待查看的变量名，在 Dev-C++ 窗口下方的调试面板中点击“<strong>添加查看</strong>”按钮，就可以在 Dev-C++ 窗口左边的“调试”窗格中看到该变量及其当前的值。（如果未选中变量名而点击该按钮，就会弹出对话框让用户输入待查看的变量名）</p>
+      <p><strong>4.设置断点（Break point）</strong> </p>
+      <p>如果程序比较长，那么在调试过程中使用“下一步”按钮（F7）和“单步进入”按钮（F8）进行操作时比较慢。可以在程序中设置断点，加快调试操作速度。 </p>
+      <p>在事先对程序的运行出错现象进行思考之后，可以推断出程序出错的可能原因在于源代码中的哪些语句。无论是在编辑状态还是在调试过程中，可以把光标移动到想要暂停执行的那一行，用鼠标点击该行左边的装订区位置中的行号（或者按 <strong>F4</strong> 键），该行就会变成红色，装订区的行号处显示有一个红点，表示该行已被设置为一个断点。再次操作则取消该行为断点。 </p>
+      <p>请在自己怀疑有问题的部分前后设置几个断点，以便进行调试。程序中可以设置多个断点。</p>
+      <p>如果程序中设置了断点，那么在启动调试时会直接运行到第一个断点（而不是第一条可执行语句）暂停。这时仍然可以用“下一步”按钮（F7）和“单步进入”按钮（F8）进行操作。如果认为程序中某一部分无误，则点击“继续”按钮就会以运行到下一个断点暂停，无断点则运行到程序末尾。</p>
+      <p><strong>5.根据调试情况排错</strong></p>
+      <p>在调试过程中，要灵活运用<strong><u>“下一步”（F7）</u></strong>和<strong><u>“单步进入”（F8）</u></strong>，并随时<strong>查看变量的值</strong>，<strong>然而在头脑中进行分析</strong>，从而判断程序中是否存在逻辑错误。 </p>
+      <p>在调试中途或最后需要按<strong>“停止执行”（F6）</strong>以结束调试。然后根据调试过程中的思考结果对程序进行修改。通常需要反复进行调试和修改才能排除程序中的错误。 </p>
+      <p class="STYLE4">&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>以上就是对 Dev-C++ 的功能简要介绍。读者也可以阅读 Dev-C++ 的<a href="index.htm">详细用户手册</a>（英文）。 </p>
+      <p>下面是简单地介绍相关示例程序和项目开发功能。</p>
+      <hr />
+      <h1 class="STYLE3"><strong>示例程序</strong></h1>
+      <p class="STYLE5">在 Dev-C++ 安装目录下的 Example 目录下提供了一些示例程序，可供初学者参考学习：</p>
+      <p class="STYLE5">hello.c 和 hello.cpp ：经典的输出“Hello, World!”字符串的简单程序。分别为 C 语言版本和 C++ 版本。</p>
+      <p class="STYLE5">leapyear.c 和 leapyear.cpp ：输入一个表示年份的数字，判断是否闰年。分别为 C 语言版本和 C++ 版本。</p>
+      <p class="STYLE5">perfectnum.cpp ：输入一个整数，检查它是否为完数（所有真因数之和正好等于这个数）。</p>
+      <p class="STYLE5">fibonacci.cpp ：输出 Fibonacci 数列的前 30 项，用数组方式实现。</p>
+      <p class="STYLE5">winmain.cpp ：通过使用 Windows API（应用程序接口） 函数编写的点击按钮之后弹出对话框输出“Hello, Windows!”。</p>
+      <p class="STYLE5">snakegame.cpp ：字符界面的贪吃蛇游戏（主要是标准 C 语言实现的，少量地使用了 Windows API 函数）。</p>
+      <p class="STYLE5">EGE-FiveStarFlag.cpp ：使用 <a href="https://xege.org/">EGE 图形库</a>（一个面向初学者的免费开源函数库）编写的图形界面程序，绘制五星红旗。 </p>
+      <p class="STYLE5">EGE-RandomLines.cpp ：使用 <a href="https://xege.org/">EGE 图形库</a>编写的图形界面程序，随机地绘制折向的线条，并以端点为圆心绘制圆形。</p>
+      <p class="STYLE3">&nbsp;</p>
+      <h1 class="STYLE3">项目开发</h1>
+      <p>Dev-C++ 不仅支持单文件开发（适合大部分初学者），还支持以项目形式的多文件开发。</p>
+      <p>点击菜单“文件 &gt; 新建... &gt; 项目”，或点击工具栏上的“新建...”按钮再点击“项目”，就可以打开“新建项目”对话框。该对话框中按照“基本”、“多媒体”、“Windows”和“终端窗口”四类提供了多种项目模板，可供用户从中选择合适的项目模板，开始自己的项目开发。例如，在“基本”类别中包含了“Windows应用程序”、“终端窗口应用程序”、“静态库”和“动态库”等，而在“多媒体”类别下面提供了分别使用 Direct3D、EGE 和 OpenGL 三种图形函数库进行图形编程的模板。</p>
+      <p>在使用项目方式进行多文件开发时，编辑窗口左边的“<strong>项目</strong>”窗格提供了相应的项目组织功能。</p>
+      <p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td><div align="center">
+      <hr />
+      <p>文档编写者联系邮箱：anbangli@foxmail.com</p>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;	</p>
+</body>
+</html>

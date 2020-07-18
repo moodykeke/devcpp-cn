@@ -1,0 +1,16 @@
+[Template]
+ver=1
+Name=EGE
+Icon=EGE.ico
+Description=Graphic program using EGE (Easy Graphics Engine)
+Category=Multimedia
+
+[Unit0]
+CName=main.c
+CppName=main.cpp
+C=egecpp.txt
+Cpp=egecpp.txt
+
+[Project]
+UnitCount=1
+Type=0

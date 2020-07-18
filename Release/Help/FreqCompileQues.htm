@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>C/C++常见编译错误解析</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+.STYLE4 {color: #FF0000; font-weight: bold; }
+.STYLE5 {
+	color: #990000;
+	font-weight: bold;
+}
+-->
+</style>
+</head>
+
+<body>
+<table width="1000" border="0" align="center">
+  <tr>
+    <td height="2773"><h1 align="center" class="STYLE5">C/C++初学者常见编译错误及其解决办法</h1>
+      <p> 用户在C/C++集成开发环境（例如 Dev-C++）中编辑了源代码，执行编译之后，常常会因为源代码中存在问题而出现编译错误（它们会显示在编译窗口中）。初学者常常会面对这些错误而不知如何处理。本文下面列出几个初学者常见的错误及其解决办法。</p>
+      <p>错误信息通常是用英语显示的，在 Dev-C++ 中如果启用了“出错信息翻译为中文”选项，则能够把常见出错信息翻译为中文，这给初学者带来了一些方便。无论是显示为英文或是翻译成了中文，初学者首先需要知道的是：<span class="STYLE2"><strong>一定要耐心地阅读编译出错信息！</strong></span>只有当你理解了错误原因，才能想出解决办法。</p>
+      <p><br />
+        <strong>1、字符错误或缺失。</strong></p>
+      <p>初学者最常见的是在源程序中出现字符拼写错误或字符缺失        </p>
+      <p><strong>例1</strong>：编译信息第二行指示程序第6行第33列，信息为“<span class="STYLE4">[错误] 期待 ';' 在此之前: 'return'</span>”，这时源程序中已经定位到第6行第33列，该行此时以红色高亮显示。</p>
+      <p>鼠标双击该行，使之变成正常编辑时的语法高亮方式显示，仔细查看可以发现，实际问题是<span class="STYLE2"><strong>该行末尾缺少一个分号</strong></span>。修改后再次编译，就能编译成功。</p>
+      <p><img src="images-cn/err1-semi.png" alt="semi" width="903" height="587" /></p>
+      <p>&nbsp;        </p>
+      <p><strong>例2</strong>：编译信息中第一条是警告信息，指示第6行第10列；第二条是错误信息，指示第 6 行第 10 列，信息内容都是“<span class="STYLE2"><strong>[错误] 缺失终止的 &quot; 字符</strong></span>”。这时编译器已经定位到源程序中第 6 行，以红色高亮显示该行。</p>
+      <p>鼠标双击该行，使之变成正常编辑时的语法高亮方式显示，仔细查看即可发现，<span class="STYLE2"><strong>待输出的字符串最后缺失了一个双引号</strong></span>。修改后再次编译就会成功。</p>
+      <p><img src="images-cn/err2-quote.png" alt="quote" width="903" height="587" /></p>
+      <p>        对这类缺失字符产生的错误，常常在编辑时稍作留心就会发现：在正常编辑时的语法高亮方式显示下，一对双引号内的字符都被视为字符串而以特定的颜色显示，当后面缺失作为字符串结束标志的双引号时，该行后面的字符都被视为字符串而显示为特定的颜色，据此可以辨认出这种错误。</p>
+      <p> 这个例子还说明，真实错误未必在编译信息中指示的位置（这是编译器确定程序有错的位置），可能出现在该位置之前或之后。需要检查这个位置的前后，仔细分析和思考，找出真正的错误所在。</p>
+      <p>&nbsp;</p>
+      <p> <strong>例3</strong>：这里出现了大量的编译信息，都指示到第 8 行的第 10 列之后各列，其中第一条信息为“<span class="STYLE2"><strong>[错误] 非法字符'\241' 在程序中</strong></span>”，后续信息也都类似。</p>
+      <p><img src="images-cn/err3-char.png" alt="char" width="903" height="583" /></p>
+      <p>鼠标双击该行，使之变成正常编辑时的语法高亮方式显示，仔细查看即可发现，实际错误是该行出现了用中文双引号括起来的中文字符（在应该使用英文引号的地方用了中文引号），修改为英文双引号之后即可编译成功。</p>
+      <p> 对这类非法字符产生的错误，常常在编辑时稍作留心就会发现：当光标在该行编辑时，非法字符会以红色粗体字高亮显示。据此可以辨认出这种错误。</p>
+      <p>这个例子还说明，出现大量错误信息时也不要慌张，集中注意力解决第一个错误，常常可以消除一批出错信息。另外，凡是出现类似于“非法字符'\241' 在程序中”的错误信息，一般都是因为程序中不正确地书写了中文字符。</p>
+      <p>&nbsp;</p>
+      <p>        <strong>例4</strong>：出现了三条加工信息，“单元”一栏显示的都不是本程序文件，而是在其它文件中。第2行的错误信息是“<span class="STYLE2"><strong>程序中缺少 main 函数</strong></span>”。仔细查看源程序即可发现，原来是本程序中把“main”误写成“mian”了。这种函数名错误可以正常通过编译，但是在连接时就会出错（出错信息为“<span class="STYLE2"><strong>[错误] 连接器返回错误代码 1</strong></span>”，其中“ld”表示连接程序，“1”是出错代码），原因是连接器找不到主函数了。</p>
+      <p><strong>把误写的“mian”修改为正确的“main”</strong>之后即可编译成功。</p>
+      <p><img src="images-cn/err4-mian.png" alt="mian" width="903" height="583" /></p>
+      <p>        这个例子说明，编程不细心就可能犯各种编辑错误，前例中的中文与英文用错是一类常见错误，而此例说明输入英文时也可能产生拼写错误，从而产生编译错误或连接错误。</p>
+      <p> 常见的英文拼写错误及其产生的编译错误信息有：</p>
+      <ul>
+        <li>“#include”误写成“include”，会同时产生如下编译信息：“[错误] 'include' 未命名某个类型”、“[错误] 'cout' 未在此范围内声明”和“[错误] 'endl' 未在此范围内声明”；</li>
+        <li>“iostream”误写成“iostraem”，会产生编译信息：“[错误] iostraem: 没有这个文件或目录”；</li>
+        <li>“std”误写成“stt”，会产生编译信息：“[错误] 'stt' 不是一个 名字空间的名称”；</li>
+        <li>“cout &lt;&lt; ”误写成“cout &lt; ”，会产生错误信息“[错误] 无效的操作符”</li>
+        <li>“cout &lt;&lt; ”误写成“cout &gt;&gt; ”，不仅会产生错误信息“[错误] 不匹配 '运算符&gt;&gt;' ”，还会相应地产生十几条相关的错误信息！</li>
+      </ul>
+      <p>&nbsp;</p>
+      <p><strong><u>2、**** 在此范围内没有声明</u></strong><strong><u> </u></strong></p>
+      <p>这是一类非常类似的类编译错误信息非常类似，例如这样：</p>
+      <p><span class="STYLE2"><strong>[错误] 'printf' 在此范围内没有声明</strong> </span></p>
+      <p class="STYLE2"><strong>[错误] 'sin' 在此范围内没有声明</strong> </p>
+      <p class="STYLE2"><strong>[错误] 'i' 在此范围内没有声明</strong></p>
+      <p><strong>解决办法</strong>：显然，对于前面两种情况，应该<span class="STYLE2"><strong>在文件头部添加 #include 语句，把相应的标准库头文件包含进来</strong></span>。而对第三种情况，应该<span class="STYLE4">添加对变量的声明</span>。  </p>
+      <p>&nbsp;</p>
+      <p><strong>3、重复定义：**** </strong></p>
+      <p>这通常是指变量被重复定义。例如：</p>
+      <p class="STYLE4">[错误] 重复定义：'i'</p>
+      <p>解决办法：删除对该变量的重复定义。</p>
+      <p>&nbsp; </p>
+      <p><strong><u>4、源文件编译时一切正常，可是运行时却显示“</u></strong><strong><u>Error 127： 找不到指定的程序</u></strong><strong><u>”</u></strong><strong><u> </u></strong></p>
+      <p>这是在Windows XP下运行Dev-C++ 时由于用户随意更改编译配置而产生的问题。 </p>
+      <p>Dev-C++ 所集成的 TDM-GCC 编译器可以根据编译配置而编译出不同的可执行文件。Dev-C++ 在工具栏的“编译配置”下拉框中提供了多个不同的配置选项，如下图所示： </p>
+      <p><img src="images-cn/dev-compiler.png" alt="compiler" width="967" height="212" /></p>
+      <p>这六个选项中，“64位”表示编译出的可执行文件为 64 位编码，“32位”表示编译出的可执行文件为 32 位编码。由于64位系统能兼容32位软件，所以在64位的Windows 7/Vista/8/10上随便选哪个选项，编译出来的可执行文件都能运行。但是 32 位系统（主要是指 <strong>Windows XP</strong>）上不能运行64位的程序，所以在Windows XP系统上，用户必须选择含有“32位”的选项才行。如果误选了“64位”的选项（初学者常常是不明白它们之间的差别而随意选择），则可以正常编译出可执行文件，但是却不能运行，出现上述错误。 </p>
+      <p><strong>解决办法</strong>：在“编译配置”下拉框中改选含有“32位”的选项，然后重新编译运行。 </p>
+      <p> </p>
+      <p><strong><u>5、无法打开输出文件，许可拒绝</u></strong><strong><u> </u></strong></p>
+      <p>这种情况通常是程序可以编译并运行，然后用户多次修改并重新编译运行，忽然在编译时就出现了如下错误信息： </p>
+      <p class="STYLE2"><strong>无法打开输出文件****.exe，许可被拒绝； </strong></p>
+      <p class="STYLE2"><strong>[错误]连接器ld返回状态码1</strong>。 </p>
+      <p>原因是：编译和连接之后要生成一个新的可执行文件（扩展名为 .exe），但是用户上一次运行该可执行文件并没有结束，所以试图生成新文件时被操作系统拒绝。 </p>
+      <p><strong>解决办法</strong>：<span class="STYLE4">关闭你上一次运行时的终端窗口</span>（最好是在终端窗口中按回车键结束其运行，而不要用鼠标点击窗口右上解的“×”），然后重试。 </p>
+      <p>如果重试时仍然出现同样的错误，<span class="STYLE4">请关闭 Dev-C++，然后重新打开文件，再一次进行编译</span>。 </p>
+    <p>如果还出现同样的错误，请点击菜单“文件”下面的“另存为……”，把这个文件另存为一个新的名字，然后再试。</p>
+    <p>&nbsp;</p>
+    <p><strong>6、其它常见编译问题</strong></p>
+    <p>您也可以前往 <a href="http://c-faq.com/">http://c-faq.com/</a> ，阅读更详细的常见问题解答（英文）。</p>
+    <p>&nbsp;</p></td>
+  </tr>
+  <tr>
+    <td><hr />
+    <p>如果您还见到一些类似的常见编译错误，请发电子邮件给本文档编写者：<strong>anbangli@foxmail.com</strong> ，以便收集起来供别人参考。</p>
+    <p>&nbsp;</p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,57 @@
+#This file contains translation lines of the templates
+A console application (MS-DOS window)
+控制臺應用程式（MS-DOS窗口）
+Console Application
+控制臺應用程式
+A Dynamic Link Library (DLL)
+動態鏈接庫（DLL）
+An empty project
+空白專案
+Empty Project
+空白專案
+A static library (.a)
+靜態庫（.a）
+Static Library
+靜態庫
+A standard Windows application
+標準Windows應用程式
+Windows Application
+Windows應用程式
+A classic Hello World program
+經典的Hello World程式
+A console with an input loop
+含有輸入迴圈的控制臺程式
+Input Loop
+輸入迴圈
+A number guessing game
+猜數遊戲
+Jackpot
+猜數遊戲
+A OpenMP multithreading example
+OpenMP多線程示例
+A C++ multithreading example
+一個C++多線程示例
+A basic Direct3D program
+基本的Direct3D程式
+Graphic program using EGE (Easy Graphics Engine)
+使用EGE（簡易圖形引擎）的圖形程式
+A basic OpenGL program
+基本的OpenGL程式
+A simple Windows file editor
+一個簡單的Windows檔編輯器
+File Editor
+檔編輯器
+A Windows MDI file editor
+Windows MDI檔編輯器
+MDI Editor
+MDI編輯器
+A Windows painting example
+Windows繪畫示例
+Animation Example
+動畫範例
+Basic
+基本
+Multimedia
+多媒體
+Console
+控制臺
