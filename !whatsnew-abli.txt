@@ -1,0 +1,866 @@
+
+2020-07-15
+编辑器在缺少配置文件的状态下，所建立起来的语法高亮方案中，把几个背景颜色都设为黑色。这个不影响正常安装使用。但是如果用户拷贝文件到新机器上，就会出现这种问题。所以还是要解决为好。
+
+当前使用的语法高亮方案保存在 devCFG.pas 中的 devEditor.syntax 。但是不知道在首次运行时其默认值是从哪里读得的。
+仔细想明白了：在 SynEdit 默认的配色方案（存在于 SynEditHighlighter.pas）中只包含了文件程序文件中的元素，而不包含额外的颜色设置。如果没有给定的话就会是黑白颜色。所以在 TdevEditor.SettoDefaults 中添加相应的语句，解决。
+
+当默认的附属参数文件不存在时，自动创建：
+codeinsertion.ini
+defaultcode.ini
+tools.ini
+
+2020-07-14
+已知问题：在“编辑器设置”中进入“语法高亮”选项卡时，高亮对象的下划线属性丢失。我默认是把“非法字符”设置为带有下划线，一旦进行修改就会丢失下划线属性。检查后未发现原因。-- 已解决：在点击某个项目时会显示相应的粗体、斜体和下划线属性，而一旦修改这些属性所对应的复选框就会引发高亮方案发生变生，导致读入原先的属性。现在的办法是先把这几个复选框设为 disabled ，然后只在它们为 enabled 状态下读入属性。
+
+2020-7-13  v5.14
+重新修改了HTML帮助文档以及相应的图片。
+新增函数 MainForm.TransMenuMacro()，用于翻译代码片段、自定义工具和编译器配置。从而可以自动把这几项也灵活地切换各种语言。
+在原有的首次运行选择界面语言功能中，自动为检测Windows系统的界面语言并设置为相应的语言。
+
+原有的“设置书签”和“前往书签”必须要牢记编号，很不方便。
+实际上它是在编辑器内部设置成这样子的。
+修改为“设置/取消书签”、“前一个书签”和“后一个书签”。
+方法是在 Editor中设置一个保存行号的数组，利用这个行号数组配合编辑器内部的书签功能而实现这三个功能。
+
+
+2020-07-10
+修改“新建 -> 项目”，使之支持多语言翻译。翻译词条文件（*.translate）位于 Templates 目录下。
+
+2020-07-07
+- 原有的“插入代码片段”中的“日期/日间”和“文件头注释模板”是内嵌的功能，不是外部可以修改的片段。
+  修改之，使它们都统一是可以修改的片段。
+  同时，把默认的这些片段中添加了一些可供翻译的宏名。这些宏名的前后都加上“$”字符。
+- 原的的“默认源代码”也进行改进，使之可以使用一些可供翻译的宏名，并可设置光标位置。
+
+这些功能位于：TMainForm.CodeInsClick，TEditor.InsertDefaultText，TEditor.InsertString
+
+2020-07-04
+- 重新调整工具栏的布局。删除标准工具栏上的“替换”、“跳到函数”“到某行”按钮。
+  添加“剪切”、“复制”、“粘贴”、“切换行注释”和“格式化当前文件”按钮。
+  把“新建文件...”、“添加书签”、“前往书签”下移到项目工具栏。
+
+2020-07-02
+多次思考图标列表的修改。因为在主界面上并没有图标列表，让我感到很困惑。
+今天先是发现 ActionList 有 Images 属性，里面有 dmMain.MenuImages_XXX 可选。以此为关键词在 Total Commander 中搜索，终于发现在 DataFrm.dfm 中设置了多个 ImageList。待修改之。
+现有的图标都是 16x16 的，很不清楚。希望能在网上找到更清晰的图标库。
+在网上搜索了一遍，虽然图标库很多，但是对应于程序开发的图标库反而是很少见的。不容易找到。
+百度“应用程序  图标库”可以找到一些图标库。但是要完全适应所需并不容易。
+一个基本的想法是：调整工具栏的配置，使第一行工具栏上显示所有常用按钮，第二行工具栏全部是项目或面向对象的工具。
+需要添加 AStyle图标，在对话框中添加Web网址。
+另一个想法是下载Windows 的shell32 图标库，以它来替换原来的 Blue 主题图标（该套图标并不完整）。
+也许可以在这里挑选下载：https://icons8.com/icon/set/open-source/color
+	或：https://www.easyicon.net/iconsearch/new%20look/
+
+2020-06-28
+左窗格的 ClassBrowsing 列表中，原来每次点击对象时就会把点击对象反色显示，黑字变成白字（实际上是 clHighlightText），在几乎为白色的背景下看不清楚。
+改进：在 VCL\ClassBrowsing\ClassBrowsing.dproj 的 ClassBrowsing.cpp 的 TClassBrowser.AdvancedCustomDrawItem 中，添加一行文字，指定显示颜色为 clWindowText 和 clWindowFrame：
+  if Stage = cdPrePaint then begin
+    Sender.Canvas.Font.Color := clWindowText; //clBlack;  //abli
+    Sender.Canvas.Font.Style := [fsBold];
+    if bInherited then
+      Sender.Canvas.Font.Color := clGrayText; //clGray;  //abli
+上面是在绘制节点的主要文字时的事先设置。然后是交给 TCustomTreeView 去绘制。此后再补充绘制参数表和节点类型。
+如果仔细地看，可以发现，对于高亮的节点，高亮背景的右边一点点是被遮盖住了。算了，不要再改了。
+
+TODO: 左窗格和下窗格中的各种对象的颜色，目前是自定义一套颜色，而不会变化。需要统一地更改为跟随系统或跟随高亮方案。
+
+================================
+2020-5-29
+今天下载安装了 Mingw-w64（它声称可以支持64位和32位），然后进行编译和调试，看上去似乎在64位和32位方案下都可以正常调试（遇上 cout << endl; 时不会出错）。然后我细致地看了看编译配置，并对含有“64位”的编译方案的“使用下列位宽编译(-mx)”指定为64位编译，然后编译时出现“Sorry, unimplemented: 64-bit mode not compiled in”。这下子我明白了它实际上并不能编译生成64位可执行文件。
+同时，在网上找到有人的说法，调试时遇上 cout<< endl; 就死掉仅出现在64位情况。
+所以总结出来，32位调试是没有问题的，而64位需要在编译时进行优化为好。默认改为32位调试吧。
+================================
+
+
+发现一个新问题：当列数较大，而光标位置超过编辑器宽度时，编辑器居然不知道向右自动调整显示。
+
+
+运行时发现，调试程序时经常性地无法停留到断点！在GDB 的输出窗口中总是出现 breakpoints-invalid! 
+怀疑是 TDM-GCC 9.2.0 与 GDB 7.9.1 配合得很不好。
+后退到 TDM-GCC 5.1.0 ，测试结果发现也是如此。修改编译参数的“代码优化”也并不变化。
+
+
+
+TODO：高亮当前行显示时，仅把非打印字符进行高亮，当前行的代码仍然沿用正常显示颜色。
+TODO：汉字双引号应该用宽字符。
+TODO：编译器配置名称写在 devcpp.ini 中，实际上却需要翻译。
+TODO：新建项目的模板文件中含有需要翻译的条目。需要添加到翻译文件中。
+TODO：菜单“工具”下面的自定义工具的名称需要写成多语言翻译的条目。
+
+2020-5-15
+- 发现一个问题：在退出单个文件时删除了编译后生成的可执行文件。这是不应该的。
+  检查发现，在 main.pas 中的 actCleanExecute 中调用 fCompiler.Clean;
+  在Compiler.pas 的 TCompiler.Clean 中删除可执行文件。
+- 在关闭文件或关闭程序时用 actStopExecuteExecute(nil) 停止执行，而不是清理。
+  但编译器正在运行时是无法中止的，所以编译时关闭程序会造成出错（TODO）。
+
+- 非法字符不修改背景，仅添加下划线，从而可以比较清晰地显示出来。OK
+
+
+2020-5-14
+- 原有的语言文件对比工具 LangCompare 形如鸡肋，不起任何实际作用。
+- 编写语言文件同步工具 LangSync。把新文件中不存在的条目都复制粘贴英文条目。
+
+
+我向 TDM-GCC 作者反映的 GDB 调试时遇到 cout << endl; 语句时处理不正常，
+好几天了还没有得到回应。也许需要我自己去检查 GDB 的源代码才行。
+
+
+2020-5-12
+试图把菜单“工具”下面的自定义工具的名称写成多语言翻译的条目。
+语句都写好了，但是却失败了。原因是设置工具菜单项是在读取英语语言文件之后、读取用户语言之前。
+
+2020-5-11
+在上课时调试发现一个严重的问题：在调试时，虽然GDB窗口显示的信息是正确的，但是却不能把查看的变量的值提取出来显示到调试窗格中。
+添加查看是在 Debugger.pas 。但是信息提取似乎应该是在 DebugReader.pas 中。
+TDebugReader.ProcessWatchOutput
+重新编译并检查，发现结果却是正常的。
+
+2020-5-10
+发现“常用错误解答”网页中的编译截图未修改为中文。修改之。OK
+
+发现程序中写双引号和单引号时没有自动输入成对。
+检查之后发现，所有这些都是在 Editor.pas 中的 TEditor.HandleSymbolCompletion 可以处理。
+但是它们并没有起作用！不知道是怎么回事。检查之后发现可能是与SynEdit 中发生了重复冲突。处理OK
+
+发现程序中写单个的 for、while 和 do 时，下一行未能自动缩进。
+检查程序发现，这个问题挺难的。完整的逻辑是：
+  当按下回车时，如果当前行是以 for 或 while 开始和左圆括号结束，或者当前行只含有 do 时，则新行向右缩进；
+  如果当前行是 for 或 while 或 do的一条语句，则按下回车时，新行需要向左减少缩进。
+很难处理！放弃修改。
+
+2020-5-07
+出现大错误了：使用 TDM-GCC v9.2.0, 调试时无法停留到如下形式的断点：
+cout << "Hello" << endl; ，
+而使用 TDM-GCC v5.1.0 也出现同样的问题。总是报告说该形式的断点是 breakpoint-invalid
+
+向 tdm-gcc 作者报告了这个问题。
+
+
+2020-4-30
+- 在启用“高亮当前行”的条件下，应该对其它字符仍然沿用正常的背景颜色。
+  检查发现涉及两个地方：
+	main.pas：procedure SetColors(Point: TBufferCoord); 使用 devEditor.HighColor
+	SynEdit.pas 的 function colEditorBG: TColor;  使用 ActiveLineColor
+  但是短时间内无法解决。
+
+
+2020-4-27
+- 修改 GitHub 上的网页（只需要修改软件项目的 readme.md 文件即可，用 MarkDown语法书写）
+- 设置了多个下载链接：GitHub、天翼云盘和百度云盘。
+
+- 启用中国电信天翼网盘：cloud.189.cn（手机微信扫描登录。手机号-大宝生日倒数，似乎无效）
+  把文件上传到 software 目录并生成共享，然后插入到GitHub中的软件项目的 readme.md。
+
+2020-4-27
+- 发现我实现了编译出错信息翻译成中文之后，编译出错信息都是黑色文字（应该是分颜色显示），
+  而且编译结束后是定位到第一条信息（应该是定位到第一条错误信息或警告信息）。
+  花时间修正了这两个问题。
+- 继续添加翻译词条。估计还得针对指针和结构体
+
+2020-4-26
+2018级学生周天喆反映说不能自动缩进了。花时间检查处理。
+- 检查 AutoIndent 选项，觉得可能是在 SynEdit.pas 的 TCustomSynEdit.LeftSpacesEx
+  有可能是因为字符串的 String 和 AnsiString 类型所致。它是计算左侧空格数的。排除。
+- 可能是智能Tab键的原因？检查发现它是控制按下Tab键时的行为。排除。
+- 可能是“添加缩进到 {} 和 : ”。
+  对比 SynEdit.pas 和 SynEdit.205.pas，发现问题在于 TCustomSynEdit.ExecuteCommand 函数。
+  新版本居然在 Options 里面删除了 eoAddIndent，并在该函数中删除了一大段内容。
+    eoAddIndent, //Will add one tab width of indent when typing { and :, and remove the same amount when typing }
+  仔细检查，发现修改的还不少，把切换注释都给删除了。当时很轻易地接受了。全部复原。
+- 猜测修改者是想把 SynEdit 修改为一个通用的文本编辑器，就把这些源码专用编辑功能删除了。
+  既然如此，就很难再合并到他们现在的版本中去了。否则我需要把这些功能调整到DevCpp项目中来。
+  
+  光标处输入右配对括号时，应该不输入该字符。在TCustomSynEdit.ExecuteCommand 中的 ecChar: 下面添加处理。
+
+- 发现 gitee.com 和 github.com  的下载速度都非常慢！慢到只有几十K。完全让人无法接受。 
+
+
+2020-4-24
+修改编译出错信息的翻译方法：在 Lang 目录下建立同名的 ".msg" 文件，依次书写英文和中文词条进行翻译。    
+2020-4-23    
+在Dev-C++的项目模板库中添加 EGE 编程示例程序
+在线图片-图标转换：https://app.xunjiepdf.com/img2icon/
+
+在编译信息窗口添加选项“出错信息翻译为中文”
+内部添加语言词条 ID_ITEM_TRANSLATEMSG
+添加全局变量 devData.TranslateMsg 
+
+2020-4-19
+今天在百度百科和知乎上进行了一些推广。
+欢迎使用我改进发布的 Dev-C++ 5.13 中文版：https://gitee.com/anbangli/Dev-Cpp 。（详细说明见安装后的 whatsnew-cn.txt）
+
+楼主你好！我花了一些时间对Dev-C++的源代码和默认参数进行了改进，现在发布了 Dev-C++ 5.13 中文版。安装过程非常简单，使用也更方便。欢迎下载试用：https://gitee.com/anbangli/Dev-Cpp 。（详细说明见安装后的 whatsnew-cn.txt）
+
+要想把 Dev-C++ 推广，主要是需要针对这两个竞赛：
+http://www.noi.cn/ 全国青少年信息学奥林匹克竞赛
+https://ccpc.io/ 中国大学生程序设计竞赛
+
+
+陆续地添加了一些编译错误信息的中文替换
+
+编译后需要注意 GDB输出窗口 DebugOutput 的位置是否正常。
+
+
+2020-4-19
+想出了一个简陋的编译信息部分中文化的想法：
+把前 10 条信息进行逐句地字符串替换。
+TCompiler.DoOutput
+TMainForm.CompOutputProc
+
+
+http://mingw-users.1079350.n2.nabble.com/MinGW-and-Non-English-Locale-on-Windows-7-td6503997.html
+
+My point is not to get English output
+but highlight the fact that the 
+current GCC localization does not work on Windows 7 (at least not on 
+the 64-bit system; probably not on the 32-bit system either)
+and 
+provide some analysis so that other people who have more time and 
+initiative may actually work out a fix. 
+
+
+不再试图改用 TDM-GCC 9.2.0。在下一版本中改用，并实现编译信息全中文化。
+
+
+2030-4-18
+如果正在调试过程而执行“关闭文件(actCloseExecute)”、“关闭所有文件(actCloseAllExecute)”和“关闭整个程序(FormClose)”，则可能出错。在这几个函数中添加
+actCleanExecute 或 actStopExecuteExecute，从而解决这种出错可能性。
+
+在双击关联的文件时，打开文件并切换到前台：
+在 main.pas 的 TMainForm.OpenFileList 中添加语句：Application.BringToFront;
+
+2020-4-17
+
+试图改用 TDM-GCC 9.2.0。但是调试时会出错死掉。
+手工启用 GDB，载入 exe 文件并 start，可以启动，但是会出现连续的错误信息：
+Python Exception <class NameError> Installation error: gdb.execute_unwinders f
+unction is missing:
+Python Exception <class NameError> Installation error: gdb.execute_unwinders f
+unction is missing:
+Python Exception <class NameError> Installation error: gdb.execute_unwinders f
+unction is missing:
+Python Exception <class NameError> Installation error: gdb.execute_unwinders f
+unction is missing:
+
+在c:\TDM-GCC-9.1.0 下手工执行 GDB时并不出现这个错误，但是在上级目录含有中文字符时就会出现这个错误。
+
+这个应该向作者去反映。只有等这个问题得以解决，才能把 GDM-GCC 9.2.0 添加到 Dev-C++中。
+
+下一步工作：把 packmaker 和 packman 修理好吧。
+检查 packmaker，一切正常可用。
+检查 packman，编译有问题
+
+设想：把 Code::Blocks 中的那个画NS盒图图的插件加入到 Dev-C++ 的工具中。
+Nassi Shneiderman图，简称NS图或盒图，是结构化编程中的一种可视化建模。
+NS图是在1972年由Isaac Nassi及其学生Ben Shneiderman提出。
+NS图类似流程图，但所不同之处是NS图可以表示程序的结构。
+在 Code::Blocks 中点击菜单“插件 > 管理插件”，选中NassiShneiderman并确认。
+该插件能够将一段代码转换成一个流程图，也能够的反过来编辑那张图，然后再生成一段代码。
+点击菜单“视图 > 工具栏 > NassiShneidermanPlugin”，出现该工具栏。
+以后可以点击菜单“文件 > 新建 > Nassi施奈德曼图”，新建并编辑该图。
+显然这个插件并不方便结合到 Dev-C++ 中去。
+详细介绍：http://wiki.codeblocks.org/index.php/NassiShneiderman_plugin
+仍然停留在 v0.5 。也许作者已经放弃它了。放弃这个想法。
+
+在GitHub 中找到一个合适的工具 NSBuilder：
+https://github.com/nsbuilder-hub/nsbuilder/releases
+试用了一下，操作并不方便。
+
+找到 AStyle （Artistic Style）的主页并下载最新版本。http://astyle.sourceforge.net/
+
+询问如何把 TDM-GCC 进行汉化。在TDM-GCC主页添加了一个 issue ，但是还没人回答。
+
+2020-4-16
+
+（2020-4-14）发现 Dev-C++ 5.13 中文版 有一个严重的问题：在编辑过程中，输入了
+一个合法函数名及其括号之后，整个软件就会死掉。
+目前可以这样设置以解决该问题：菜单“工具 > 编辑器选项”，取消勾选“显示函数提示”。
+
+问题就是函数提示不正常："Control" has no parent window
+花了一天试图解决这个问题
+Editor.pas:
+
+在 TEditor.EditorStatusChange 函数中：
+   fFunctionTip.Show
+FunctionTip 是 TCodeToolTip 类，里面包含一个 Parser，
+  // Function parameter tips
+  fFunctionTip := TCodeToolTip.Create(Application);
+  fFunctionTip.Editor := fText;
+  fFunctionTip.Parser := MainForm.CppParser;
+  
+具体是在 CodeToolTip.pas 中实现的：procedure TCodeToolTip.Show;
+
+运行时无法直接看到是哪一行出错。感到很迷惑。发现是把编译模式设为了 release。
+切换编译模式为 debug ，并且重新构建，然后就可以追踪到具体出错语句行。
+同时观察 call stack 列表，可以看到是从哪里过来的。
+TCodeToolTip.RethinkCoordAndActivate;
+ActivateHint
+在 TCodeToolTip.Show; 函数中，求出待显示的函数原型，放置于 FLookupEditor 里面
+	FLookupEditor.Text := Caption;
+	
+在 TCodeToolTip.DummyPaint 函数中，在循环中第二次运行如下语句时就会出错：
+  FLookupEditor.CaretX := CurPos; // 当 CurPos 循环第二次到这一行时就出错
+错误信息：The control xxx has no parent window
+从 Call Stack 中可以看到：
+SetCaretX -> SetCaretXY -> SetCaretXYEx -> EnsureCursorPosVisible 
+
+这个问题太难了，解决不了。
+在 EditorOptFrm.pas 中强制设定 ShowFunctionTip := FALSE。
+
+又想了一想，故意把 DummyPaint 注释掉，也仍然出现这个错误。原来是类似的 Paint 函数出错。
+把这两个函数都改掉，只实现最简单的文字输出。这已经能够相当好地满足用户需求了。
+
+在添加工具中增加两个宏： <WINDIR> 和 <PROGRAMFILES>
+
+
+2020-04-10
+- 出现了奇怪的错误：工具栏按钮不再显示功能提示了。
+  花费了两个小时检查，没有发现任何原因。关闭一些正在运行的其它程序之后，恢复正常。
+
+- 发现另一个问题：在左边面板中的“查看类”，不能检查出当前程序中的变量和函数。
+  检查发现是 ClassBrowsing 中由于 AnsiString 和 String 类型所引起的。解决。
+
+- 把“查看类”改为“程序结构”，更易被初学者理解。
+  里面的配色方案很怪，点击了某个对象之后，变成灰底白字，看不清楚了。
+  实际上是 TClassBrowser 里面实现的，大致地查看了里面的绘制过程，没弄懂全过程，没解决。
+
+- OK 保存文件之后，需要更新程序标题 
+- todo: 调试面板上的控件的字号似乎被强制设为 9 磅，而不能是我预设的 10 磅。
+  检查结果：TPageControl 的字号是固定不变的，无法修改为 InterfaceFontSize
+
+- OK 编译信息中的字号默认为 8 磅，看不清楚。更改为 10磅 
+- OK 启动调试时，如果没有调试信息，则强迫用户选择含有调试功能的编译器配置方案。
+
+- 装订栏上不允许鼠标点击时，应该不切换到手形鼠标。解决。
+  SynEdit.pas： TCustomSynEdit.UpdateMouseCursor
+- 把编译器信息列表窗口的字号修改为11 磅，感觉好多了。
+
+- 花时间精确地调整字体字号。结论为：如果要显示中英文，则设为 MS San Serif 比较好。
+  如果只单独显示英文，则设为 Segeo UI 很好，但是中文会默认为微软雅黑，不合适。
+  把下方面板“编译信息”标签下的信息列表字体改为11磅，感觉好多了。
+
+2020-04-09  
+- 把“当前行”颜色添加到语法高亮配色方案中。
+- 花时间对所有语法高亮配色方案进行精确的调整。
+- 发行时要注意使用“经典+”配色方案。
+  
+  
+2020-04-08
+- 花时间改进了“关于”对话框，添加了我在 GitHub 上的 Dev-Cpp-cn 主页。
+
+- 根据我的经验，使用 TDM-GCC 4.9.2 进行调试时，遇到含有“ << endl”的语句就会死掉。
+  里面的 GDB 是 7.8.1 。所以需要想办法解决。
+
+  在修改“关于”对话框时检查了里面列出的所有网址，发现 TDM-GCC 发布了新版本 9.2.0：
+	https://jmeubank.github.io/tdm-gcc/download/
+  请蔡斌帮忙从 GitHub 下载到 TDM-GCC 9.2.0 的安装文件。安装到本机。拷贝到 Dev-C++目录下。
+  修改用户目录下的 devcpp.ini，把安装目录由 MinGW64 修改为 TDM-GCC-64，并把版本号 4.9.2 修改为 9.2.0。
+  可以编译，也可以运行。但是调试时出错，似乎是里面所包含的 GDB 8.3.1 输出信息与以前不同了。
+  所以 TDebugReader.GetAnnotation 都读不到信息。
+
+  面临着两难的局面：如果沿用 4.9.2 则无法调试含有“ << endl”的语句。
+  如果改用 9.2.0，则需要大量修改源代码。
+
+  折中的想法：在 TDM-GCC 网站上去找一找，能不能找到一个能调试含有“ << endl”的语句的版本。
+  在 sf.net 上找到较旧的版本 5.1.0：https://sourceforge.net/projects/tdm-gcc/files/
+  （安装时要注意去掉底部的“check update ……”选项才能继续。）
+  发现 TDM-GCC 5.1.0 可以正常编译，所含的 GDB 7.9.1 能正确调试。不过仍然不能处理 << endl 。
+
+  网上有人说是“如果编译器是GCC TDM 5.1.0-2 版本就会有这个BUG。把TDM版本回到5.1.0。”
+  但是我测试了，TDM-GCC 5.1.0 的两个版本都是如此。
+  甚至把 GDB 7.9.1 拷贝到 TDM-GCC 9.2.0 （以替换GDB 8.3.1）也不行。
+
+  手工执行 GDB 7.9.1 也可以看出，确实是遇到 << endl; 就会死掉。
+  手工执行 GDB 8.3.1 可以看到，当遇到 << endl; 时需要执行三行才行。可以正常进行下去。
+  而且还遇上了一堆错误：Installation error: gdb.execute_unwinders function is missing:
+  网上搜索是在 Ubuntu 里面可以解决。但是不知道 Windows 下如何解决。
+
+  产生一个取巧的想法：在 iostream 中添加一个预处理命令，把 endl 转换为"\n"，也许可以解决这个问题。
+  试过了。对于单独的 endl 确实能解决问题。但是如果遇上 std::endl 就会出错了。
+
+  花费了一整个晚上，最后看到有人说 -g3 和 -ggdb 之类的差别。想起来很有可能是需要调整编译器选项。
+  摸索了一下，是在“代码生成/优化”里面的“代码生成”下要使用“优化级别(-Ox)”。
+  无论是设为“Debug(g)”或“Low”、“Mid”之类的都可以。解决！
+
+  tdm-gcc 5.1.0 中所带的 gdb.exe 和 gdb64.exe 是同一个文件，都是 64位的。
+  只好从 tdm-gcc 4.9.2 中复制 gdb32过来：gdb32.exe
+gdbserver32.exe
+zlib.dll
+
+-------------------------------------------------------------------------------
+MinGW MinGW-w64 TDM-GCC等工具链之间的区别与联系
+原创无忧老猪 最后发布于2014-05-07
+相同点：
+一、 他们都是用于编译生成Windows应用程序的工具链。
+二、 他们都是基于gcc的。
+
+不同之处（只说大的）：
+一、项目之间的关系
+1. MinGW应该是最先诞生的。
+2. MinGW-w64项目最初是做为MinGW的一个分支而诞生，但现在已经独立发展。详细信息参见：
+http://sourceforge.net/apps/trac/mingw-w64/wiki/History
+http://zh.wikipedia.org/wiki/MinGW
+
+3. TDM-GCC及其他类似的编译器集成包
+ TDM-GCC是非官方组织提供及维护的编译器集成包。换句话说，他不是由MinGW或MinGW-w64项目官方提供的编译器集成包。
+但他基于MinGW及MinGW-w64。而且，他也有他的优点：
+例如，TDM-GCC集成了：
+最新的稳定版本的GCC工具集，
+一些实用的补丁，
+MinGW及MinGW-w64中的运行时API。
+————————————————
+MinGW已经不推荐使用。只有32位版，更新速度也不怎么样。MinGW-w64更新最快，基本上gcc更近后几周内就会跟进。32位和64位都提供。TDM-GCC，更新速度也不怎么样，同时提供32位和64位。涉及64位时，TDM-GCC和MinGW-w64还有一个重要的区别，64位的TDM-GCC既能编译64位binary，也能编译32位binary（用-m32参数）。而MinGW-w64无此能力，你需要装32位和64位的两套MinGW w64 tool chain来编译两种binary。
+
+作者：知乎用户
+链接：https://www.zhihu.com/question/39952667/answer/129667881
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+----------------------------------------------------------------------
+
+
+发行时要注意：1、添加是否使用折叠按钮和是否允许点击折叠；
+2、把编译配置修改为中文名称。
+
+应该在调试面板中添加快捷键名称
+
+1、debug：Debug通常称为调试版本，通过一系列编译选项的配合，编译的结果通常包含调试信息，而且不做任何优化，以为开发人员提供强大的应用程序调试能力。Debug版本包括调试信息，所以要比Release版本大很多（可能大数百K至数M）。
+
+Debug调试，可以对软件进行单步执行、堆栈跟踪、调试等操作来发现bug。至于是否需要DLL支持，主要看你采用的编译选项。如果是基于ATL的，则Debug和Release版本对DLL的要求差不多。
+
+2、release：发行版，如果最终调试后程序没有明显bug，可以作为可用的软件分享给他人使用就可以使用这个选项编译。而Release通常称为发布版本，是为用户使用的，一般客户不允许在发布版本上进行调试。
+
+所以不保存调试信息，同时，它往往进行了各种优化，以期达到代码最小和速度最优。为用户的使用提供便利。
+
+3、profiling：性能分析。可以对软件执行过程中的cpu利用率，内存占有进行分析。也可以用来发现、分析异常、bug。
+
+2020-04-07
+- 解决装订栏上的代码折叠按钮和线条不连贯的问题：
+  in function TCustomSynEdit.PaintGutter
+  draw continuing folding lines and squres. after the following comment:
+  // Draw the folding lines and squares
+
+-添加 ClickCodeFolding 参数，是否允许用户点击折叠按钮进行代码折叠/解折叠。
+
+试图改进编译器配置：
+1、发行时默认为 64位编译器，但如果是32位系统，则自动改为默认使用32位编译器配置。成功。
+2、编译器配置名称改为多语言版。很困难。放弃。涉及到的函数有：
+	载入所有配置：TdevCompilerSets.LoadSets
+	载入单个配置的详细参数：TdevCompilerSets.LoadSet
+主要原因是：配置名被用于很多场合。
+
+添加功能：启动时自动新建一个空白源文件，如果用户此时打开一个旧文件，则自动关闭该空白源文件。
+
+删除语言词条26024，修改 26026
+
+关闭文件时，保存到 最近打开的文件，应该进行对比，避免重复。
+
+2020-04-06
+分析调试信息阅读器 DebugReader.pas
+获取标志：
+TDebugReader.ProcessDebugOutput
+TDebugReader.GetNextAnnotation  -> TDebugReader.GetAnnotation
+处理行号：TDebugReader.HandleSource
+解决调试信息不能及时反映到编辑窗口的问题。
+原因是在提取 GDB 输出信息时，Utils.pas 中的字符串查找函数 RPOS 需要正确地处理 AnsiString。
+现在已经完全能够正确地进行调试了。
+
+但是GDB信息窗口的空行太多，以至于用户看不出里面的信息在变化。需要删减空行。
+添加信息是在 TDebugReader.SyncFinishedParsing 的 MainForm.DebugOutput.Lines.Add(fOutput);
+把连续的两个换行回车替换为一个换行回车，减少了空行。
+
+顺便注意到“添加监视”对话框中的字体为 Arial，很难看。试图修改。
+但是发现它实际上是使用Delphi内建的 InputQuery 函数实现的。很难修改。
+
+
+2020-04-05
+学会了 GDB （64位可执行程序为 gdb.exe，32位为 gdb32.exe）的手工用法。
+先启动GDB: gdb
+载入待调试的文件：file test
+启动调试并停留在第一条语句：start
+启动调试并停留在第一个断点：run
+逐行调试：next
+逐句设计：step
+
+启动调试是在 main.pas 中的 TMainForm.actDebugExecute，
+里面先设置调试参数并启动 GDB：Debugger.pas 中的 fDebugger.Start;
+然后发送命令载入待调试的文件：fDebugger.SendCommand(file
+" + filepath + ");
+添加功能：如果程序中没有断点，则发送 start 命令，启动调试并停留在第一条语句。
+在Delphi 中检查了半天，感觉 GDB 进程似乎是开启了，但是实际效果却象是并没有开启。
+怀疑是不是 String 与 AnsiString 引起的。恢复使用原有的 Debugger.pas 和 DebugReader.pas。能启动了。
+
+犯了一个小小的错误：向 GDB 发送命令时，后面不应该带有 \ ，该字符被视为续行符。
+解决调试问题：文件在根目录下时不能调试。
+原因是发送命令到 GDB时，需要把 filepath 中的 \ 替换为 / 才行。
+
+现在可以动起来了，但是并不能及时地在编辑窗口中反映出来。
+
+
+2020-04-03
+考虑解决调试问题：不能逐句调试；文件在根目录下时不能调试。
+
+Debugger.pas
+procedure TDebugger.Start;
+启动调试，然后读取输出信息
+TDebugReader.GetAnnotation
+
+
+
+
+2020-04-02
+调试 Dev-C++ 的编译功能，多次都无法追踪进入 compiler.pas 中的 Tcompiler.Compile。感到很迷惑。
+然后重新 Build 一次，就恢复正常了。
+
+怀疑命令行中的没有指定编译器 g++ 的绝对路径所致。修改，使之设置为编译器的绝对路径。
+
+在 TCompiler.Compile 中设置编译命令，然后交给另一个线程处理：
+	LaunchThread(cmdline
+ExtractFilePath(fSourceFile));
+实际上是唤起名为 “fDevRun” 的线程：fDevRun.Resume;
+追查到 devRun.pas 中的 TDevRun.Execute，
+继续追查到 Utils.pas 中的 RunAndGetOutput
+检查出来，是在使用 API 函数 ReadFile 时的参数 aBuf 必须为 ansichar，转换为指针也必须是 pansichar。
+以上解决编译问题。
+
+编译成功之后，不能正常运行。
+检查发现实际上是调用 compiler.pas 中的函数 Tcompiler.Run 。
+而该函数里实际上又是运行 devcpp.exe 同一目录下的 ConsolePauser.exe。
+该可执行程序的功能是打开终端运行，并在程序运行完毕之后暂停。
+必须把 ConsolePauser.exe 拷贝到 devcpp.exe 同一目录下。
+
+2020-03-30
+工具栏上的[编译(F9)]按钮对应着 main.pas 中的 TMainForm.actCompileExecute;
+然后执行 TMainForm.PrepareForCompile 和 TMainForm.GetCompileTarget
+实际上是执行 fCompiler.Compile; 但是似乎不方便追踪进去。待查。
+然后点击工具栏上的[运行(F10)]时总是报告说源代码未编译。真怪。
+然后就不断地执行 TMainForm.LogEntryProc，以输出日志信息
+
+编译参数大概是 RunParams
+
+从编译信息中提取 ERROR 和 WARNING 是 TMainForm.CompEndProc 
+
+fCompiler.CheckSyntax;
+
+fCompiler 是 TCompiler，在 Compiler.pas 中定义。
+
+注意打包时要把 devcpp.ini 中的“Illegal Char”改为“IllegalChar”，“KeyWord” 改为“ReservedWord”
+
+
+2020-03-29
+试用时发现两个严重问题：
+  编译出错时所显示的行列信息为空白，错误信息为乱码。估计是编译信息在反复转换时出错。
+  在设置颜色高亮时，点击的信息没有相应地变化
+  
+  分析出来了：它是根据名单列表来显示的
+  如果不能调试，是因为设置为了 Release 模式。
+
+待解决的问题：调试！
+有 endl 时不能逐句执行；
+文件置于磁盘根目录时不能开启调试
+没有断点时需要停留到第一条语句
+
+
+
+2020-03-28
+还有一个问题，就是多层折叠的按钮显示得不够美观。
+仔细观察，发现是 按钮尺寸太小，没有顶格绘制。
+分析发现应该是在 SynEdit.pas 中的 gutterpaint 函数中处理的
+但是里面似乎是调用一些内部的图像，很可能是对中层的折叠按钮也绘制了与顶层一样的按钮。
+
+在工具栏上添加了“新建源代码”的按钮，并设置其 action 即自动适应多语言翻译。
+
+解决遗留问题：编辑窗口不能用鼠标滚轮调整字号。
+注意到 main.pas 的 TMainForm.FormMouseWheel 已经具有鼠标流轮调整字号的功能。
+在 Editor.pas 中添加 TEditor.EditorMouseWheel 过程，把参数全部发给 MainForm.FormMouseWheel 。
+再在Editor.pas 中添加语句 fText.OnMouseWheel := EditorMouseWheel;
+相当于是在编辑器控件中把滚轮消息转发给编辑器，再转发给主窗口。
+
+解决问题：菜单项“Package Manager”总是显示为英文。
+检查之后发现，它对应的 actPackageManager 的 Caption也应该改为相应菜单的名称才能改变为其它语言。
+
+Dev-C++ 可以安装第三方的函数库。
+发行者可以用 PackMaker 制作，安装者可以用 Package Manager 安装。
+忽然地发现，Package manager 打开时缺失 TDevPages 
+
+把编辑器设置对话框中的语法高亮下的两个列表都添加多语言功能。
+
+
+2020-03-27
+要处理配置窗口中的字体，需要在 LoadFonts 中清除那些非等宽字体（只保留等宽字体）。
+通过在网上查找，终于在 stackoverflow.com 中找到了合适的解决方案。
+
+（2020-03-26）估计着需要在 Editor.pas 中在合适的函数里调用 ScanForFoldRanges。
+分析 Demos\Folding\demo.pas ，大致看明白了：
+1. 需要在外层对象（演示程序中的 TForm1，Dev-C++ 中的 Editor）中创建一个函数，
+名称为 ScanForFoldRanges。
+2. 在合适的事件中写这么一句：
+    SynEdit1.OnScanForFoldRanges := ScanForFoldRanges
+    
+根据前一天的分析，在 Editor.pas 中添加了 TEditor.ScanForFoldRanges 函数，
+然后在编辑器的参数设置函数 TEditor.Create 中添加语句：
+  fText.OnScanForFoldRanges := ScanForFoldRanges;  //by abli  
+实现了正常的代码折叠。
+还有一个问题，就是多层折叠的按钮显示得不够美观。
+
+新增了一个问题：在退出编辑器时会弹出一个错误。
+
+
+2020-03-26
+如果在 DevCpp 中使用控件 SynEdit 2.0.5，则会出现无法解决的异常。所以看来还是只能使用 SynEdit 2.1.0。
+
+括号配对是在 TEditor.EditorPaintTransient 中处理。
+但是大量的配色方案中都出现明显错误，导致配对括号显示不正确。原因是在 SetColors 中设置不正确。
+配对括号的背景会用 14 symbol 的前景色，而前景色总是黑色。
+前景等于 fText.Highlighter.WhitespaceAttribute.Background，似乎是正确的。
+甚至改用其它颜色也是不行的。不知道是否为不可读取？
+仔细检查过了这些属性的 public 或 publish 属性，发现都是正确的。
+最后发现，必须把 SetColors 置于计算 Pix 之后。可能是计算 Pix 时修改了颜色（未深入处理）。
+  Pix := fText.RowColumnToPixels(fText.BufferToDisplayPos(HighlightCharPos));
+  SetColors(HighlightCharPos);  //
+解决了括号配对的显示颜色问题。
+
+
+2020-03-24
+继续思考 SynEdit v2.1.0 的代码折叠问题。
+代码折叠类 继承自 代码高亮器类(TSynCustomHighlighter)。
+
+从 代码高亮器类(TSynCustomHighlighter)发展了一整套针对各种语言的高亮器类。
+例如针对 C++ 的 TSynCppSyn。
+
+试图分析 Demos 中的示例程序。
+要使用 Demos 这些程序，需要使用 SynEdit_R 并编译构建，就可以生成 *.dcu 文件。
+从 Source 目录中复制 *.dcu、*.inc 和 *.res 到待处理的 Demo 目录中。
+然后就要以打开相应的工程文件并编译、构建和运行。
+
+试过了演示代码折叠的 Folding 工程。发现确实可以进行代码折叠，但是括号不能配对显示。需要询问作者才行。
+
+
+试着编译 v2.0.8 （注意要把当前版本的文件夹名称改为 SynEdit），可以编译。
+但是 devcpp 中一些修改后的东西又不适用了。运行程序时会出意外死掉。
+检查不出原因。看来还是只能用 v2.1.0
+
+This is SynEdit 2.1.0 pulled from https://github.com/SynEdit/SynEditby Christian Budde- 在网上检索“Delphi 哪个版本最好”，回答是 Delphi 7 、Delphi 2010 和 Delphi XE6。- 问：如果只做普通VCL程序，Delphi XE 哪个版本好用？用过的来说下感受。  答：本人用XE2多些。它是第一个支持编译64位Exe的XE版本，虽然目前本人开发的程序并没完全发挥64位的优点。后续版本编译出来的 exe越来越大(当然，XE2编译出来的也不算小)，后续版本重点是对跨平台和FMX做优化，针对VCL的改进并不多。第一个可以开发mac平台程序的Delphi版本(基于FMX)，可以拿来尝尝鲜，性能略惨……VCL直接支持Unicode(这是废话了，XE都是支持Unicode的， 这只是针对D7之类的优点)2020-3-9 -- 3-17Dev-C++ 5.11 自带 SynEdit 2.0.5，可用Delphi 7 编译。想要升级 SynEdit到最新版本几乎花了10来天，分别使用 Delphi 7、Delphi 2010 编译SynEdit的两个版本：SynEdit 2.1.0：https://github.com/SynEdit/SynEditSynEdit 2.0.8：http://synedit.sourceforge.net一方面由于 Delphi 2009 开始支持Unicode，导致 AnsiChar/Char AnsiString/String出现了巨大差别，另一方面由于 SynEdit 2.1.0 修改了代码折叠功能必须使用 Delphi XE才支持，所以花费了很多时间和精力。最后确认应该使用 SynEdit XE2 编译 SynEdit 2.1.0。2020-03-16
+·考虑了 ClassBrowsing ，里面有些需要改为 String，有些需要维持为 AnsiString，相应的字符相关函数也要进行调整。
+·前两天编译的版本不支持读入语言代码了。仔细检查时发现，源代码中是根据对象的类型而选择读写方法，而Delphi 2009 之后增加了 tkUString 这个类型名称而且我把一些属性改成了String，从而导致不会读写。在 CFGData.pas 添加了这个类型名称，解决问题。
+
+分析代码折叠功能。SynEdit v2.0.5 中原来处于 SynEdit.pas 的代码折叠类被拆分到了 SynEditCodeFolding.pas。
+技术上是有一个 TSynFoldRanges 类，会执行 OnScanForFoldRangesEvent 事件。
+
+在 SynEdit.pas 中，SynEdit类 有一个 fUseCodeFolding 属性决定是否使用代码折叠功能。追踪这个属性可以找到哪里使用代码折叠。
+
+该属性是在 TCustomSynEdit.SetUseCodeFolding 中设置的。
+procedure TCustomSynEdit.SetUseCodeFolding(const Value: Boolean);
+Var
+  ValidValue : Boolean;
+begin
+  ValidValue := Value and ((Assigned(fHighlighter) and
+      (fHighlighter is TSynCustomCodeFoldingHighlighter))
+        or Assigned(fOnScanForFoldRanges));
+
+ TCustomSynEdit.PaintGutter 中绘制折叠 [+] 和 [-] 按钮
+ 
+试图在 Editor.pas 中的 TEditor.Create 函数中设置 UseCodeFolding 属性，
+  fText.UseCodeFolding := true; //abli 
+但是这样导致运行时新建源代码就出错。似乎不应该在这里设置该属性。
+
+2020-03-15
+发现昨天编译的版本不支持代码折叠了
+检查发现应该是 SynEdit\Source\SynEditCodeFolding.pas 里面有较大修改
+
+可能需要启用 fUseCodeFolding 为 TRUE才行。
+
+相应地我在把 Editor.pas 注释了多个位置的代码。涉及到了FoldHidesLine、GutterWidth 等几个已移除的属性。
+
+检查以前修改过的地方：
+EditorOptFrm.pas:
+	procedure TEditorOptForm.SetGutter;
+折叠区几个参数无效了。
+
+
+现在的版本即不支持代码折叠功能，也不支持配对括号高亮了！有一个可能的解决办法是仍然使用较旧的 SynEdit v2.0.5 而不用较新的 v2.1.0。不过可能需要更改对字符串的支持。
+
+想起来了，在 SynEdit.inc 中最末尾处定义的是满足 SYN_DELPHI_XE_UP 时才能使用代码折叠功能。注意到 Delphi XE 是 2010 年发行的，比 Delphi 2010 （2009）要迟。所以需要使用更高版本的 Delphi 才行。不需要使用较早的 SynEdit 2.0.5 吧。
+// Code Folding
+{$IFDEF SYN_DELPHI_XE_UP}
+//{$IFDEF SYN_DELPHI_2010_UP} //abli
+  {$DEFINE SYN_CodeFolding}
+{$ENDIF}
+
+2020-03-14·在 Source\VCL\ClassBrowsing\ClassBrowsing.dpk 涉及到了字符指针。·花时间了解了字符类型的字符指针类型，添加了类型转换，编译成功。
+  也许在未来需要更一些时间去彻底解决这些问题。
+·把 VCL 目录下的所有类都编译成功。
+
+·打开 devcpp.dpr ，编译时出现一些错误。其中一些是涉及到字符串类型，逐一修改就行了。
+  但是关键的错误信息是找不到 VCL目录下提供的那些类（虽然都已经编译成功）。
+  解决办法：依次打开 VCL 目录下的各个 dpk 文件，会自动生成相应的 .dproj文件，并在工程管理器(Project Manager)中显示为树形结构，里面显示了相应的 bpl 和下属的多个类(Class)。在 *.bpl 上点击右键，-> Install，即可安装成功。
+  
+
+编译 devcpp.dpr ，
+  
+在 tests.pas 中出现了一些错误，看上去是 新作者把  ecComment、ecUncomment、ecToggleComment和 ecCommentInline这几个词 从 SynEditKeyCmds.pas 和 SynEdit.pas 中给移除了。不得不找回来。但是编译不成。
+  
+编译时发现 CollapseAll、UncollapseAll、UncollapseAroundLine等与代码折叠相关的过程无效。检查发现，在SynEdit.pas 中要求定义了 {$IFDEF SYN_CodeFolding} 才能使用这些过程。再检查就发现，是在SynEdit.inc 文件中要求在 {$IFDEF SYN_DELPHI_XE_UP} 条件下才定义 SYN_CodeFolding。修改 SynEdit.inc 中的该条件为{$IFDEF SYN_DELPHI_2010_UP}。
+在 EditorOptFrm 中对 CodeFolding 属性显示错误。注释之。需要检查。
+
+关于代码折叠，另一些说明是在 CodeFolding.md 中。
+  
+
+SynEdit 中删除了一些属性：eoAddIndent
+SetCaretXYCentered
+IdentChars
+FoldHidesLine
+GutterWidth
+IsEmpty
+影响到 Editor.pas
+
+
+ 
+ 继续编译，发现出现无数的 AnsiString 与 String 的不相容现象。看来需要全部替换才行。
+ 下狠心把所有 .pas 文件进行上述替换。但是SynEdit 中的 SynUnicode.pas 没有替换（它可能就是解决这类问题的，所以需要区分）。
+  
+  PAnsiChar 全部替换为 PChar
+  
+编译时若需修改版本号，则需要：1、在Project 的 Option 中修改版本号，2、在Version.pas 中修改 DEVCPP_VERSION = 5.13;
+  
+  
+2020-03-10
+·写了封邮件给 Github 上的 SynEdit 分支版本的作者。希望他能写好该软件的 Delphi 7 项目文件。原因是 Dev-C++ 只提供了 Delphi 7 编译。--过了两天之后收到回信，建议升级到免费的社区版Delphi（the Free Delphi: Community Edition），但是申请失败。失败理由也很奇怪。网上有网友介绍说需要使用国外邮箱，但是也不一定能成功。放弃之。
+·但是想了一想，应该升级到 Delphi 2010 为好。于是下载安装Delphi 2010，安装破解，并解决多次启动时的字体缺失问题。
+
+·用 Delphi 2010 成功编译 Github 上的 SynEdit 分支版本。
+·根据 Dev-C++ 源程序中的 readme.txt 进行编译： 
+		Source\VCL\DevCpp.dpk
+		Source\VCL\SynEdit\Packages\SynEdit_<Delphi Version>.dpk
+		Source\VCL\ClassBrowsing\ClassBrowsing.dpk
+		编译出现的错误信息较多。需逐一解决。
+		主要原因是从 Delphi 2009 开始，字符类型和相关函数都发生了较大变化。
+
+------------------------------------------------------------------------原来的Delphi中有两种字符串：AnsiString和WideString。默认的string即AnsiString。从 Delphi 2009 开始就有了三种字符串类型：AnsiString、WideString、UnicodeString。默认的string即为UnicodeString。对应的相关类型包括：AnsiString - PAnsiChar - TAnsiString?(这个可以有……这个真没有，JclAnsiStrings.pas是一个替代品)WideString - PWideChar - TWideStrings(WideStrings.pas)UnicodeString - PWideChar - TStrings(Classes.pas)在实际应用中，一般应使用UnicodeString。在效率第一的场合，可以使用AnsiString处理Ansi文本。而WideString仅在使用COM的场合DelphiXE下的字符串变化：https://blog.csdn.net/shuaihj/article/details/6257129
+------------------------------------------------------------------------
+delphi 里的@^#等符号都是什么意思？
+@:取址运算符; 
+var 
+int:integer; 
+p:^integer; 
+new(P); 
+int:=24; 
+p:=@int; 
+dispose(P); 
+
+^:指针的引用解析操作符; 
+var 
+pint:^integer; 
+
+new(pint); 
+showmessage(inttohex(integer(@pint),8); 
+pint^:=$ff; 
+showmessage(inttohex(pint^,4)); 
+
+#:ASCII码值表示符; 
+const tab_key=#9;//TAB键的ASCII值 
+
+总结： 
+^: 指针 
+@: 取址 
+#: 十进制符 
+$: 十六进制符 
+------------------------------------------------------------------------
+
+2020-03-09
+Delphi 7 操作方法
+- [Project -> View Source ] 打开主程序文件 devcpp.dpr 。
+  其中的 uses 部分列出了需要调用的部件和相应的文件。
+  回想起来了，PASCAL 程序的基本结构是：
+  program XXXX
+  uses XXXX in XXXX;
+  var XXXX: XXXX
+  begin 
+    XXXX
+  end.
+   
+
+
+
+2020-03-05
+设想：
+1、需要用新版的 SynEdit 替换原来的 SynEdit。需要对新版 SynEdit 进行编译。
+估计是先需要学习使用 Delphi 7 对 SynEdit 进行编译。然后再设法把源代码整合进来。
+
+2、编译器为什么不能在根目录下调试？为什么不能正确地逐行跳过输出 endl 的语句？
+
+
+
+==================================================================
+安装了 Delphi 7 之后，打开 source 目录下的 README.txt，按照里面的指示进行操作。
+Dev-C++ 内部所用的编辑器是 SynEdit：https://github.com/SynEdit/SynEdit。也许需要更新。
+主工程文件：devcpp.dpr
+==================================================================
+https://github.com/tycho/devcpp
+学习使用 Git 和 GitHub：https://git-scm.com/book/zh/v2
+中文教程：https://blog.csdn.net/mythmayor/article/details/82346539
+	https://blog.csdn.net/chenj_freedom/article/details/50543152
+
+2018-11-08：
+读了一下 git 网站上的介绍文章：https://git-scm.com/book/zh/v2
+其中要求下载安装 Git ，然后开始使用命令行。可以考虑自己新建一个项目或者参与别人现在的项目。
+看到其中需要使用 git clone 命令。于是想到在 GitHub 上看到有克隆命令。
+转到 GitHub，查看别人的项目，果然就有 [Clone or Download]（克隆或下载）按钮。
+点击之后，发现需要自行安装 GitHub Desktop。下载之后就自动安装完毕。
+安装这个东西之后，在 GitHub网站中找到一个项目，点击[Clone or Download] 按钮，即可下载到本机。
+
+克隆了 Devcpp 和 SynEdit，然后对照了一下 DevCpp中所用的 synEdit，看来是比较陈旧的版本。
+
+现在的这个Dev-C++源代码似乎比我手头的要新一些。但是编译之后不能运行程序，奇怪啊。可能需要问其它作者才行。
+
+
+
+
+2018-05-14:
+“项目管理”选项卡下方的项目右键菜单中，第一项总是显示为英文“New File”。检查多次找不出原因。故意修改其动作（Action）为其它项目，然后再修改回来，就发现它恢复正常为“New Unit”（“新建单元”）了。原因是它的标题应该与它所指定的动作的标题一致才行。
+
+2018-1-10:
+- devCFG.pas: change default font to "Courier New"
+default font size to 12.
+- EditorOptFrm.pas: in procedure TEditorOptForm.LoadFonts
+delete invalid fonts.
+
+2017-12-28：
+想到一个这样的临时性解决办法：
+
+找到“开始调试”所对应的函数，先分析源文件所在的位置，如果是位于根目录下，则弹出提示，建议用户把文件重新保存到另一个目录下。
+
+顺便增加一个提示：调试时如果发现没有任何断点，则建议用户至少增加一个断点。
+
+main.pas:
+
+          filepath := ExtractFileDir(e.FileName);
+          if (Length(filepath) =3) then begin
+            MessageDlg(Lang[ID_ERR_FILEONDISKROOT]
+mtError
+[mbOK]
+0);
+            exit;
+          end;
+
+  if (fDebugger.BreakPointList.Count = 0) then
+    MessageDlg(Lang[ID_ERR_NOBREAKPOINT]
+mtWarning
+[mbOK]
+0);
+    
+    
+LangIDs.inc: 
+
+  ID_ERR_FILEONDISKROOT                 = 61025;
+  ID_ERR_NOBREAKPOINT                   = 61026;
+
+Chinese.lng
+61025=您的源文件位于磁盘的根目录下，无法执行调试。请把它保存到某个子目录下，然后再试。
+
+61026=源程序中没有设置任何断点。建议您在调试之前至少设置一个断点为好。
+
+
+version : 5.13
+

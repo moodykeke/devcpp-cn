@@ -1,0 +1,40 @@
+downloaded from https://github.com/SynEdit/SynEdit
+
+by Anbang Li (anbangli@foxmail.com), 2020/4/7
+
+
+SynEditKeyCmds.pas  added:
+
+  ecComment         = 614;
+  ecUncomment       = 615;
+  ecToggleComment   = 616;
+  ecCommentInline   = 617;
+  ecAutoCompletion  = 650;
+ 
+SynEdit.pas:
+
+- move these procedues from protected to public 
+    procedure SetCaretXY(const Value: TBufferCoord); virtual;
+    procedure SetCaretXYEx(CallEnsureCursorPos: Boolean; Value: TBufferCoord); virtual; 
+    
+    function LeftSpaces(const Line: UnicodeString): Integer;
+    function LeftSpacesEx(const Line: UnicodeString; WantTabs: Boolean; CalcAlways : Boolean = False): Integer;
+ 
+- change the property from read-only to read-write  
+    property StateFlags: TSynStateFlags read fStateFlags write fStateFlags;
+
+- add property:
+    property GutterWidth: Integer read FGutterWidth;
+    
+- in function TCustomSynEdit.PaintGutter
+  draw continuing folding lines and squres. after the following comment:
+  // Draw the folding lines and squares
+
+SynEditCodeFolding.pas:
+
+- While UseCodeFolding, show Collapsed line by default: fShowCollapsedLine := True;
+
+- Added property "ClickCodeFolding": Allow click the folding squares to fold/unfold
+	TCustomSynEdit.DoOnGutterClick
+	TCustomSynEdit.GetCollapseMarkRect
+	TCustomSynEdit.UpdateMouseCursor
