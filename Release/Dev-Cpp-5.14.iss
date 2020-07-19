@@ -49,7 +49,12 @@ Source: "*.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "*.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "*.manifest"; DestDir: "{app}"; Flags: ignoreversion
 
-Source: "AStyle\*.*"; DestDir: "{app}\AStyle"; Flags: ignoreversion recursesubdirs createallsubdirs;
+Source: "AStyle\AStyle.exe"; DestDir: "{app}\AStyle"; Flags: ignoreversion recursesubdirs createallsubdirs;
+Source: "AStyle\LICENSE.md"; DestDir: "{app}\AStyle"; Flags: ignoreversion recursesubdirs createallsubdirs;
+Source: "AStyle\README.md"; DestDir: "{app}\AStyle"; Flags: ignoreversion recursesubdirs createallsubdirs;
+Source: "AStyle\doc\*.*"; DestDir: "{app}\AStyle\doc"; Flags: ignoreversion recursesubdirs createallsubdirs;
+Source: "AStyle\file\*.*"; DestDir: "{app}\AStyle\file"; Flags: ignoreversion recursesubdirs createallsubdirs;
+
 Source: "Help\*.*"; DestDir: "{app}\Help"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Lang\*.*"; DestDir: "{app}\Lang"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "TDM-GCC-64\*.*"; DestDir: "{app}\TDM-GCC-64"; Flags: ignoreversion recursesubdirs createallsubdirs

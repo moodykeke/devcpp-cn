@@ -1,17 +1,28 @@
 
 Dev-C++ Version 5.14 - 15 July, 2020, by Anbang Li£¨anbangli@foxmail.com )
 
-The main improvement of this version is that the working interface has been greatly modified.
-- Modify the toolbar: the first line shows the main toolbar, Edit Toolbar, compile toolbar and compile configuration.
-- Buttons added to EditBar: Cut, copy, paste, insert code snippets, set/cancel line comment and format current file with AStyle..
+The main improvement of this version is that the working interface has been 
+greatly modified.
+- Modify the toolbar: the first line shows the main toolbar, Edit Toolbar, 
+  compile toolbar and compile configuration.
+- Buttons added to EditBar: Cut, copy, paste, insert code snippets, 
+  set/cancel line comment and format current file with AStyle..
 - Buttons removed from EditBar: search and replace, goto function, go to line.
-- The second line of toolbars shows the Project Bar and the Class Bar. Removed set bookmarks and go to bookmarks.
+- The second line of toolbars shows the Project Bar and the Class Bar. 
+  Removed set bookmarks and go to bookmarks.
 
-- Modified the bookmark function. The previous "set bookmark" and "go to bookmark" needed to remember the location of each bookmark, it's not practical. New functions: "set/cancel bookmark" (shortcut: Ctrl + k), "previous bookmark"
-(shortcut Ctrl + U) and "next bookmark" (shortcut Ctrl + J).
+- Modified the bookmark function. The previous "set bookmark" and "go to 
+  bookmark" needed to remember the location of each bookmark, it's not 
+  practical. New functions: "set/cancel bookmark" (shortcut: Ctrl + k), 
+  "previous bookmark"(shortcut Ctrl-U) and "next bookmark" (shortcut Ctrl-J).
 
-- Improved multilingualism. After installation, it will automatically detect the interface language of the Current Windows system and use the same interface language. 
-- Code snippets, custom toolbars, compile configuration schemes, and templates in new projects now support multi language. When the user changes the interface language in environment options, All these elements can switch to the appropriate language.
+- Improved multilingualism. After installation, it will automatically detect 
+  the interface language of the Current Windows system and use the same 
+  interface language. 
+- Code snippets, custom toolbars, compile configuration schemes, and templates 
+  in new projects now support multi language. When the user changes the interface 
+  language in environment options, All these elements can switch to the 
+  appropriate language.
 
 
 Dev-C++ Version 5.13 - 4 May 2020, by Anbang Li (anbangli@foxmail.com)

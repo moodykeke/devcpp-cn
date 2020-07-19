@@ -9,5 +9,5 @@ This is an updated fork of Orwell Dev-C++, almost all components are updated to 
 
 Dev-C++ is distributed under the terms of the GNU GENERAL PUBLIC LICENSE Version 3 (released on 29 June 2007). If you continue to install this software, it means that you agree the license.
 
-https://banzhusoft.github.io/devcpp/
+https://banzhusoft.github.io/
 https://sourceforge.net/projects/devcpp20/

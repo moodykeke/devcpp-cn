@@ -417,7 +417,7 @@
 						<VersionInfo Name="MajorVer">5</VersionInfo>
 						<VersionInfo Name="MinorVer">13</VersionInfo>
 						<VersionInfo Name="Release">0</VersionInfo>
-						<VersionInfo Name="Build">157</VersionInfo>
+						<VersionInfo Name="Build">158</VersionInfo>
 						<VersionInfo Name="Debug">False</VersionInfo>
 						<VersionInfo Name="PreRelease">False</VersionInfo>
 						<VersionInfo Name="Special">False</VersionInfo>
@@ -429,7 +429,7 @@
 					<VersionInfoKeys>
 						<VersionInfoKeys Name="CompanyName">Bloodshed Software</VersionInfoKeys>
 						<VersionInfoKeys Name="FileDescription">Dev-C++ IDE</VersionInfoKeys>
-						<VersionInfoKeys Name="FileVersion">5.13.0.157</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">5.13.0.158</VersionInfoKeys>
 						<VersionInfoKeys Name="InternalName">devcpp.exe</VersionInfoKeys>
 						<VersionInfoKeys Name="LegalCopyright">Copyright Bloodshed Software</VersionInfoKeys>
 						<VersionInfoKeys Name="LegalTrademarks"/>
