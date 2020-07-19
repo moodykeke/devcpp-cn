@@ -9,9 +9,9 @@ Dev-C++（或者叫做 Dev-Cpp）是 Windows 环境下的一个轻量级 C/C++ �
 
 下载链接2：[从 sf.net 下载 Dev-C++ 5.14 多语言国际版](https://sourceforge.net/projects/devcpp20/) 
 
-下载链接3：[从百度网盘下载 Dev-C++ 5.14 多语言国际版](https://pan.baidu.com/s/154A9HtbrgwSt8UuNC6400A) （需要注册百度帐号并登录，提取码：g4ka）
+下载链接3：[从中国电信天翼云盘下载 Dev-C++ 5.14 多语言国际版 X](https://cloud.189.cn/) （需要注册天翼云盘帐号并登录）
 
-下载链接3：[从中国电信天翼云盘下载 Dev-C++ 5.14 多语言国际版](https://cloud.189.cn/) （需要注册天翼云盘帐号并登录）(目前失效）
+下载链接4：[从百度网盘下载 Dev-C++ 5.14 多语言国际版](https://pan.baidu.com/s/1mMTwvOSQfxHxt-haEYGIxg) （需要注册百度帐号并登录，提取码：d2x2）
 
 ----
 有兴趣的读者可以看看源码中的[更新说明](Source/!whatsnew-abli.txt) 和 发行版中的[更新说明](Release/whatsnew-cn.txt)。
