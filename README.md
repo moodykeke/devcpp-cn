@@ -13,7 +13,8 @@ Dev-C++（或者叫做 Dev-Cpp）是 Windows 环境下的一个轻量级 C/C++ �
 
 下载链接3：[从中国电信天翼云盘下载 Dev-C++ 5.14 多语言国际版](https://cloud.189.cn/) （需要注册天翼云盘帐号并登录）(目前失效）
 
-由于TDM-GCC编译器和安装打包软件 Inno Setup 的最新版本已经不再支持Windows XP系统，而仍有少量用户需要使用该系统，所以额外提供一个使用TDM-GCC 5.1.0 作为编译器、使用Inno Setup 5 打包制作的[Dev-C++ 5.14 XP专用版](https://pan.baidu.com/s/10cfKMmH_o7Ca-0e5rTPf7Q)（百度网盘，提取码：kt6s)。
+
+有少量用户仍然在使用 Windows XP 系统，而 TDM-GCC 编译器和安装打包软件 Inno Setup 的最新版本已经不再支持该操作系统。请这些用户下载使用 TDM-GCC 5.1.0 作为编译器、使用 Inno Setup 5 打包制作的[Dev-C++ 5.14 XP专用版](https://pan.baidu.com/s/10cfKMmH_o7Ca-0e5rTPf7Q)（百度网盘，提取码：kt6s)。
 
 ----
 有兴趣的读者可以看看源码中的[更新说明](Source/!whatsnew-abli.txt) 和发行版中的[更新说明](Release/whatsnew-cn.txt)。
