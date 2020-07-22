@@ -65,6 +65,10 @@ object MainForm: TMainForm
     object CompSheet: TTabSheet
       Caption = 'Compiler'
       ImageIndex = 28
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object CompilerOutput: TListView
         Left = 0
         Top = 0
@@ -115,6 +119,10 @@ object MainForm: TMainForm
     object ResSheet: TTabSheet
       Caption = 'Resource'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ResourceOutput: TListView
         Left = 0
         Top = 0
@@ -165,6 +173,10 @@ object MainForm: TMainForm
     object LogSheet: TTabSheet
       Caption = 'Compile log'
       ImageIndex = 43
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object InfoGroupBox: TPanel
         Left = 0
         Top = 0
@@ -564,6 +576,10 @@ object MainForm: TMainForm
     object FindSheet: TTabSheet
       Caption = 'Find results'
       ImageIndex = 21
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object FindOutput: TListView
         Left = 0
         Top = 0
@@ -617,6 +633,10 @@ object MainForm: TMainForm
     object CloseSheet: TTabSheet
       Caption = 'Close'
       ImageIndex = 9
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
   end
   object ToolbarDock: TControlBar
@@ -1011,11 +1031,15 @@ object MainForm: TMainForm
     object LeftProjectSheet: TTabSheet
       Caption = 'Project'
       ImageIndex = -1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ProjectView: TTreeView
         Left = 0
         Top = 0
         Width = 185
-        Height = 181
+        Height = 182
         Align = alClient
         Anchors = [akLeft, akTop, akBottom]
         BevelInner = bvNone
@@ -1087,11 +1111,15 @@ object MainForm: TMainForm
     object LeftDebugSheet: TTabSheet
       Caption = 'Debug'
       ImageIndex = -1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DebugView: TTreeView
         Left = 0
         Top = 0
         Width = 185
-        Height = 181
+        Height = 182
         Align = alClient
         BevelInner = bvNone
         BevelOuter = bvNone

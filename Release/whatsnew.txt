@@ -1,5 +1,5 @@
 
-Dev-C++ Version 5.14 - 15 July, 2020, by Anbang Li£¨anbangli@foxmail.com )
+Dev-C++ Version 5.14 - 22 July, 2020, by Anbang Li£¨anbangli@foxmail.com )
 
 The main improvement of this version is that the working interface has been 
 greatly modified.

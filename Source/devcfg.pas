@@ -970,7 +970,7 @@ begin
   fAssociateDev := getAssociation(6);
   fAssociateRc := getAssociation(7);
   fAssociateTemplate := getAssociation(8);
-  fCheckAssocs := false;
+  fCheckAssocs := TRUE;
 
   fShowTipsOnStart := FALSE; // due to popular demand
   fLastTip := 0;

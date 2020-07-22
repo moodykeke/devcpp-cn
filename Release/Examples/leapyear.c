@@ -1,4 +1,5 @@
-//输入某个年份，判断是否为闰年（能被4整除且不能100整除，或能被400整除）
+//Input a year number, check it is a leap year or not. 
+//(divide exactly by 4 but not by 100, or diveded exactly by 400)
 
 #include<stdio.h>
 
@@ -8,9 +9,9 @@ int main() {
 	printf("please input a number：");
 	scanf("%d",&n);
 	if((n%4 ==0 && n%100 != 0) || n%400 == 0)
-		printf("%d是闰年。\n", n);
+		printf("%d is a leap year。\n", n);
 	else 
-		printf("%d不是闰年!\n", n);
+		printf("%d is NOT a leap year!\n", n);
 	return 0;
 }
 

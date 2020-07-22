@@ -4,6 +4,6 @@ Dev-C++ （或写为 Dev-Cpp）是一个Windows环境下的一个轻量级 C&C++ 集成开发环境（ID
 Dev-C++ 发行时遵循 GNU 通用公共协议（版本3）。如果您继续安装此软件，则意味着您同意该协议。
 
 中文主页：https://banzhusoft.github.io/devcpp-cn/
-英文主页：https://sourceforge.net/projects/devcpp20/
+英文主页：https://banzhusoft.github.io/
 
 

@@ -1,11 +1,26 @@
 /*********************************************************************
-程序名：绘制五星红旗
-版权：遵从GPL版权协议，可自由使用和传播（请勿上传到收费性网络文库）
-作者：anbangli@foxmail.com
-日期：2019-08-09
-说明：依据“中国国旗尺寸颜色及绘制方法”编程。
-      网址：https://www.douban.com/note/509127465/
-程序中使用了 EGE 图形函数库（https://xege.org/）进行绘图。 
+program: Draw the Chinese National Five-Star Flag 绘制中国五星红旗
+Copyright: GNU GPL v3
+Author: anbangli@foxmail.com
+Date:  2019-08-09
+Description: Draw the flag according to "How to draw Chinese National 
+Five-Star Flag": https://www.douban.com/note/509127465/
+
+Use EGE (Easy Graphic Engeer, https://xege.org/ ) to draw graphics. 
+
+Need to add some parameters to compiling options. Please click menu 
+"Options > Compiler Options", in the textbox under "Add the following 
+commands when calling the linker:", do as following:
+(a) if the current compiler set contains "64-bit", add:
+  -lgraphics64 -luuid -lmsimg32 -lgdi32 -limm32 -lole32 -loleaut32
+(b) if the current compiler set contains "32-bit", add:
+  -lgraphics -luuid -lmsimg32 -lgdi32 -limm32 -lole32 -loleaut32
+  
+(These parameters are only for programs using EGE graphic library.
+Please delete them for other programs which donot use EGE.)
+  
+说明：本程序中使用了 EGE 图形函数库（https://xege.org/）进行绘图，运行时
+会在屏幕上连续绘制随机线条，直到用户按任意键结束。
 需要在编译选项中加入一些连接参数才能成功编译。操作如下：点击Dev-C++ 
 的菜单“工具”中的“编译选项”，在“在连接器命令行中加入以下命令”下方的
 文本框中，根据编译器的配置而添加如下文字（实际上是要求在连接时把多个
@@ -14,7 +29,7 @@
   -lgraphics64 -luuid -lmsimg32 -lgdi32 -limm32 -lole32 -loleaut32
 （B）如果当前使用的编译配置中包含有“32位”，则添加：
   -lgraphics -luuid -lmsimg32 -lgdi32 -limm32 -lole32 -loleaut32
-  （以后编译其它程序时需要在编译选项中删除以上命令）
+（这些编译参数只是需要EGE库的程序所需。对于其它程序，请删除之）
 *********************************************************************/
 
 #include <stdio.h>

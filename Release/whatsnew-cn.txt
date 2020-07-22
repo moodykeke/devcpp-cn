@@ -1,5 +1,5 @@
-Dev-C++ 5.14 中文版
-李安邦 (anbangli@foxmail.com) 2020-07-15
+Dev-C++ 5.14 多语言国际版
+李安邦 (anbangli@foxmail.com) 2020-07-22
 
 这个版本的主要改进是大幅度修改了工作界面。
 

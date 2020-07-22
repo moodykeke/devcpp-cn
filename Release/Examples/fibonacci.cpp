@@ -1,8 +1,8 @@
 /*********************************************************************
-数学里非常重要的Fibonacci（斐波纳契）数列指的是数列：
-1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233，377，610 ……
-递归定义如下：F1 = 1, F2 = 1, …… F_n = F_(n-1) + F_(n-2)   (n > 2)
-请写程序求出该数列的前30项。要求使用数组。输出时每5个为一行。
+Fibonacci sequency: 1, 1, 2, 3, 4, 8, 13, 21, 34, 55, 89, 144, ...
+Its recursion definition is:
+  F1 = 1, F2 = 1, ... F_n = F_(n-1) + F_(n-2)   (n > 2)
+Write a program using array to calculate the first 30 items. 
 *********************************************************************/
 #include <iostream>
 using namespace std;
@@ -14,12 +14,12 @@ int main() {
 
     fib[0] = 1;
     fib[1] = 1;
-    for (n = 2; n <= NUM - 1; ++n)  //下标从2到 NUM-1
-        fib[n] = fib[n-1] + fib[n-2];  //根据递推公式计算数组元素
+    for (n = 2; n <= NUM - 1; ++n)  //index from 2 to NUM-1
+        fib[n] = fib[n-1] + fib[n-2];  
 
     cout << "Fibonacci sequence:" << endl;
-    for (n = 0; n < NUM; ++n)       //下标从0到 NUM-1
-        cout << fib[n] << (n % 5 != 4 ? '\t' : '\n'); //打印数组元素和分隔符
+    for (n = 0; n < NUM; ++n)       //index from 0 to NUM-1
+        cout << fib[n] << (n % 5 != 4 ? '\t' : '\n'); //print array items
 
     return 0;
 }

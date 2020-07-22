@@ -1,5 +1,5 @@
-// 查找完全平方数 (本程序有错误，供调试)
-// 程序运行时如果出现无限循环，请按 Ctrl + Break 中止。
+// Here is a incorrect program to find perfect square numbers.
+// (it may come to infinite loop in running. Press Ctrl + Break to terminate)
 
 #include <iostream>
 using namespace std;

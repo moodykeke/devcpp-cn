@@ -1,29 +1,27 @@
 /*********************************************************************
-如果一个整数的所有真因数（除了该数本身以外的约数，包括 1 在内）之和
-正好等于这个数，那么就称它为“完数”。因数之和小于自身的数称为“亏数”；
-因子之和大于自身的数称为“盈数”。写一个函数（取名为“isperfect”），
-当其参数是完数时返回 1，否则返回 0。然后编写主函数，调用这个函数求出
-10000 以内的所有完全数（共 4 个：6、28、496 和 8128）。
+We define the Perfect Number is a positive integer that is equal to 
+the sum of all its positive divisors except itself.
+
+Write a function to check a number is a perfect number or not.
+And write main function to put out pervect numbers in 2--10000.
+(Only 4: 6, 28, 496 and 8128)
 *********************************************************************/
 #include <iostream>
 using namespace std;
 
-int isperfect(int n) {    //版本1
+int isperfect(int n) {    //check if number n is a perfect number
     int k, sum = 0;
     for (k = 1;  k < n; k++)    
-        if (n % k == 0)    //发现一个因数 
+        if (n % k == 0)    //if k is a divisor of n
             sum += k;
 
-    return (sum == n)? 1 : 0;	////根据循环结束的情形来判断是否完数
+    return (sum == n)? 1 : 0;
 }
 
 int main() {    
-	cout << "10000 以内的完数："; 
+	cout << "perfect numbers less than 10000: "; 
     for (int n = 2; n < 10000; n++)
         if (isperfect(n))
             cout << n << "\t";
     return 0;
 }
-
-//扩展思考：完数是很罕见的，请编程求出后续第五个完数。 
-

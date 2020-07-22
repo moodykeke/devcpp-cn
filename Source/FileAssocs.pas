@@ -269,17 +269,18 @@ var
   I: integer;
   DdeOK: array[0..AssociationsCount - 1] of boolean;
 begin
-  for I := 0 to AssociationsCount - 1 do
-    Associated[I] := CheckFiletype('.' + Associations[I, 0],
-      'DevCpp.' + Associations[I, 0],
-      Associations[I, 1],
-      'open',
-      Application.Exename + ' "%1"');
+//  for I := 0 to AssociationsCount - 1 do
+//    Associated[I] := CheckFiletype('.' + Associations[I, 0],
+//      'DevCpp.' + Associations[I, 0],
+//      Associations[I, 1],
+//      'open',
+//      Application.Exename + ' "%1"');
 
   // Unsafe
   if FixAssocs then // set registry to last known values
     for I := 0 to AssociationsCount - 1 do
-      if (not Associated[I]) and MustAssociate(I) then
+      //if (not Associated[I]) and MustAssociate(I) then
+      if MustAssociate(I) then
         Associate(I);
 
   for I := 0 to AssociationsCount - 1 do
